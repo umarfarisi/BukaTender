@@ -13,7 +13,7 @@ import isshukan.com.bukatender.screen.BaseScreen;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class TenderFragment extends Fragment implements BaseScreen{
+public class TenderFragment extends BaseFragment{
 
 
     public TenderFragment() {
