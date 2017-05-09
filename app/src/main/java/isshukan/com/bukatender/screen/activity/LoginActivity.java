@@ -1,30 +1,19 @@
 package isshukan.com.bukatender.screen.activity;
 
-import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import isshukan.com.bukatender.R;
-import isshukan.com.bukatender.screen.BaseScreen;
 import isshukan.com.bukatender.screen.activity.controller.LoginController;
 
-public class LoginActivity extends AppCompatActivity implements BaseScreen, View.OnClickListener {
+public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
     private EditText usernameET;
     private EditText passwordET;
     private Button loginBtn;
 
     private LoginController controller;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        loadViews();
-        setDefaultSetting();
-    }
 
     @Override
     public void loadViews() {
