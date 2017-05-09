@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import isshukan.com.bukatender.constant.ConstantAPI;
+import isshukan.com.bukatender.dataaccess.BaseDA;
 import isshukan.com.bukatender.dataaccess.UserDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.mode.User;
@@ -18,7 +19,7 @@ import isshukan.com.bukatender.screen.activity.LoginActivity;
 public class LoginController {
 
     private LoginActivity activity;
-    private UserDA userDA;
+    private BaseDA<User> userDA;
 
     public LoginController(LoginActivity activity) {
         this.activity = activity;
