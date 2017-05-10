@@ -9,7 +9,7 @@ import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.BaseDA;
 import isshukan.com.bukatender.dataaccess.UserDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
-import isshukan.com.bukatender.mode.User;
+import isshukan.com.bukatender.model.User;
 import isshukan.com.bukatender.screen.activity.LoginActivity;
 
 /**

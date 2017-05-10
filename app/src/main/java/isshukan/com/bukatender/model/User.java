@@ -1,4 +1,4 @@
-package isshukan.com.bukatender.mode;
+package isshukan.com.bukatender.model;
 
 /**
  * @author Muhammad Umar Farisi

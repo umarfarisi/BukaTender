@@ -5,7 +5,7 @@ import java.util.Map;
 
 import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
-import isshukan.com.bukatender.mode.User;
+import isshukan.com.bukatender.model.User;
 
 /**
  * @author Muhammad Umar Farisi
