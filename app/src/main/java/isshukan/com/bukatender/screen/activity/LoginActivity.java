@@ -1,5 +1,6 @@
 package isshukan.com.bukatender.screen.activity;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void loadViews() {
+        setContentView(R.layout.activity_login);
         usernameET = (EditText) findViewById(R.id.usernameET);
         passwordET = (EditText) findViewById(R.id.passwordET);
         loginBtn = (Button) findViewById(R.id.loginBtn);
@@ -26,6 +28,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void setDefaultSetting() {
         controller = new LoginController(this);
         loginBtn.setOnClickListener(this);
+
+        startActivity(new Intent(this, MainActivity.class));
+
     }
 
     @Override
