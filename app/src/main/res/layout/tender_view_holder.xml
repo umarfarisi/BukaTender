@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/margin_standard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginRight="@dimen/margin_standard"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:id="@+id/photoImageView"/>
+        <RelativeLayout
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="100dp">
+            <TextView
+                android:text="Galaxi 7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:id="@+id/titleTextView"/>
+            <TextView
+                android:text="16 Agustus 2017"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/titleTextView"
+                android:id="@+id/validityPeriodTextView"/>
+            <TextView
+                android:text="HP, Elektronik, HandPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tagTextView"
+                android:layout_above="@+id/startingPriceTextView"/>
+            <TextView
+                android:text="Rp 10.000.000"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/startingPriceTextView"
+                android:layout_alignParentBottom="true"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
