@@ -7,4 +7,7 @@ package isshukan.com.bukatender.constant;
 public class ConstantAPI {
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
+
+    public static final String BASE_URL = "https://api.bukalapak.com/";
+
 }
