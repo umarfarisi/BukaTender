@@ -6,8 +6,11 @@ package isshukan.com.bukatender.support.utils;
  */
 public class APIUtils {
     public static final String BASE_URL = "http://10.0.2.2/buka_tender";
-    public static final String METHOD_READ = "read";
     public static final String TENDER_END_POINT = "/tender.php";
+    public static final String TAG_END_POINT = "/tag.php";
+    public static final String BID_END_POINT = "/bid.php";
+
+    public static final String METHOD_READ = "read";
     public static final String METHOD = "method";
 
     public static final String STATUS = "status";

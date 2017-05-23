@@ -13,11 +13,11 @@ import isshukan.com.bukatender.support.utils.GlobalVariable;
 
 /**
  * @author Muhammad Umar Farisi
- * @created 22/05/2017
+ * @created 23/05/2017
  */
-public class TenderDA {
+public class BidDA {
     public void accessAPI(Response.Listener<String> listener, Response.ErrorListener errorListener, final Map<String, String> params){
-        StringRequest request = new StringRequest(Request.Method.POST, APIUtils.BASE_URL+APIUtils.TENDER_END_POINT, listener, errorListener){
+        StringRequest request = new StringRequest(Request.Method.POST, APIUtils.BASE_URL+APIUtils.BID_END_POINT, listener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 return params;

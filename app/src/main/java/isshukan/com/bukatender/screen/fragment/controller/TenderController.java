@@ -1,6 +1,5 @@
 package isshukan.com.bukatender.screen.fragment.controller;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -41,7 +40,7 @@ public class TenderController implements Response.Listener<String>, Response.Err
         tenderDA = new TenderDA();
         Map<String,String> params = new HashMap<>();
         params.put(APIUtils.METHOD , APIUtils.METHOD_READ);
-        tenderDA.getAll(this, this, params);
+        tenderDA.accessAPI(this, this, params);
     }
 
     @Override
