@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import isshukan.com.bukatender.dataaccess.TenderDA;
+import isshukan.com.bukatender.dataaccess.api.TenderDA;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.fragment.TenderFragment;
 import isshukan.com.bukatender.support.utils.APIUtils;
@@ -38,9 +38,7 @@ public class TenderController implements Response.Listener<String>, Response.Err
     private void loadData() {
         tenders = new ArrayList<>();
         tenderDA = new TenderDA();
-        Map<String,String> params = new HashMap<>();
-        params.put(APIUtils.METHOD , APIUtils.METHOD_READ);
-        tenderDA.accessAPI(this, this, params);
+        tenderDA.getAllTender(this, this);
     }
 
     @Override

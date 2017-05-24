@@ -1,4 +1,4 @@
-package isshukan.com.bukatender.dataaccess;
+package isshukan.com.bukatender.dataaccess.api;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -8,16 +8,15 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Map;
 
-import isshukan.com.bukatender.support.utils.APIUtils;
 import isshukan.com.bukatender.support.utils.GlobalVariable;
 
 /**
  * @author Muhammad Umar Farisi
- * @created 22/05/2017
+ * @created 24/05/2017
  */
-public class TenderDA {
-    public void accessAPI(Response.Listener<String> listener, Response.ErrorListener errorListener, final Map<String, String> params){
-        StringRequest request = new StringRequest(Request.Method.POST, APIUtils.BASE_URL+APIUtils.TENDER_END_POINT, listener, errorListener){
+public class APIHelper {
+    public static void accessAPI(String url ,Response.Listener<String> listener, Response.ErrorListener errorListener, final Map<String, String> params){
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 return params;
