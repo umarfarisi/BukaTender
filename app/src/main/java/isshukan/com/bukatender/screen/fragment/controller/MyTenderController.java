@@ -1,5 +1,6 @@
 package isshukan.com.bukatender.screen.fragment.controller;
 
+import android.content.Intent;
 import android.widget.Toast;
 
 import com.android.volley.Response;
@@ -12,8 +13,10 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.dataaccess.api.TenderDA;
 import isshukan.com.bukatender.model.Tender;
+import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
 import isshukan.com.bukatender.screen.fragment.MyTenderFragment;
 import isshukan.com.bukatender.support.utils.APIUtils;
 
@@ -73,6 +76,13 @@ public class MyTenderController implements Response.Listener<String> , Response.
     @Override
     public void onErrorResponse(VolleyError error) {
         Toast.makeText(fragment.getContext(),"Error: "+error.getMessage(),Toast.LENGTH_SHORT).show();
+    }
+
+    public void onTenderChoose(int position) {
+        Tender tender = tenders.get(position);
+        Intent intent = new Intent(fragment.getActivity(), TenderDetailActivity.class);
+        intent.putExtra(Constant.TENDER, tender);
+        fragment.startActivity(intent);
     }
 
 }

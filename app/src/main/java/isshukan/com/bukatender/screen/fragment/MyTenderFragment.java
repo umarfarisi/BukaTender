@@ -33,7 +33,9 @@ public class MyTenderFragment extends BaseFragment{
     private TenderListener listener = new TenderListener() {
         @Override
         public void onTenderChoose(int position) {
-            //TODO
+            if(isControllerNotNull()){
+                controller.onTenderChoose(position);
+            }
         }
     };
 

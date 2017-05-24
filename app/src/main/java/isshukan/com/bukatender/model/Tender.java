@@ -1,5 +1,6 @@
 package isshukan.com.bukatender.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,13 +8,14 @@ import java.util.List;
  * @author Muhammad Umar Farisi
  * @created 22/05/2017
  */
-public class Tender {
+public class Tender implements Serializable{
     private int tenderId;
     private String userId;
     private String title;
     private long validityPeriod;
     private double startingPrice;
     private String imageResource;
+    private String shortDescription;
     private List<String> tag;
 
     public Tender(int tenderId, String userId, String title, long validityPeriod, double startingPrice, String imageResource) {
@@ -26,8 +28,17 @@ public class Tender {
         this.tag = new ArrayList<>();
     }
 
-    public Tender() {
+    public Tender(int tenderId, String userId, String title, long validityPeriod, double startingPrice, String imageResource, String shortDescription) {
+        this.tenderId = tenderId;
+        this.userId = userId;
+        this.title = title;
+        this.validityPeriod = validityPeriod;
+        this.startingPrice = startingPrice;
+        this.imageResource = imageResource;
+        this.tag = new ArrayList<>();
+        this.shortDescription = shortDescription;
     }
+
 
     public int getTenderId() {
         return tenderId;
@@ -85,6 +96,14 @@ public class Tender {
         this.tag = tag;
     }
 
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,12 +126,14 @@ public class Tender {
     @Override
     public String toString() {
         return "Tender{" +
-                "tenderId='" + tenderId + '\'' +
+                "tenderId=" + tenderId +
                 ", userId='" + userId + '\'' +
                 ", title='" + title + '\'' +
                 ", validityPeriod=" + validityPeriod +
                 ", startingPrice=" + startingPrice +
                 ", imageResource='" + imageResource + '\'' +
+                ", shortDescription='" + shortDescription + '\'' +
+                ", tag=" + tag +
                 '}';
     }
 }

@@ -33,6 +33,7 @@ public class TenderViewHolder extends RecyclerView.ViewHolder implements View.On
         super(itemView);
         this.listener = listener;
         this.position = -1;
+        itemView.setOnClickListener(this);
         loadViews();
     }
 
