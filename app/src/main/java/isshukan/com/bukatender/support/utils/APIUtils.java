@@ -10,8 +10,11 @@ public class APIUtils {
     public static final String TAG_END_POINT = "/tag.php";
     public static final String BID_END_POINT = "/bid.php";
 
-    public static final String METHOD_READ = "read";
     public static final String METHOD = "method";
+    public static final String METHOD_CREATE = "create";
+    public static final String METHOD_UPDATE = "update";
+    public static final String METHOD_DELETE = "delete";
+    public static final String METHOD_READ = "read";
 
     public static final String STATUS = "status";
     public static final String STATUS_SUCCESS = "success";
@@ -23,4 +26,5 @@ public class APIUtils {
     public static final String VALIDITY_PERIOD = "validity_period";
     public static final String STARTING_PRICE = "starting_price";
     public static final String IMAGE_RESOURCE = "image_resource";
+
 }
