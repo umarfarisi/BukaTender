@@ -39,11 +39,11 @@ public class TenderController{
     }
 
     private void loadData() {
-        tenders = new ArrayList<>();
         tenderDA = new TenderDA();
         tenderDA.getAllTender(new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
+                TenderController.this.tenders = tenders;
                 fragment.configureRecyclerView(tenders);
             }
 

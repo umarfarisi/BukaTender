@@ -39,13 +39,13 @@ public class MyTenderController{
     }
 
     private void loadData(){
-        tenders = new ArrayList<>();
         tenderDA = new TenderDA();
         //TODO change userId
         String userId = "123";
         tenderDA.getUserTender(userId, new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
+                MyTenderController.this.tenders = tenders;
                 fragment.configureRecyclerView(tenders);
             }
 

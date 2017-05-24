@@ -29,10 +29,10 @@ public class MyBidController{
 
     private void loadData() {
         bidDA = new BidDA();
-        bids = new ArrayList<>();
         bidDA.getUserBid("123", new DACallback<List<Bid>>() {
             @Override
             public void onSuccess(List<Bid> bids) {
+                MyBidController.this.bids = bids;
                 fragment.configureRecyclerView(bids);
             }
 
