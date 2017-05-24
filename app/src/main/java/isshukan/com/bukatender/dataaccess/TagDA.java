@@ -8,7 +8,7 @@ import com.android.volley.toolbox.Volley;
 
 import java.util.Map;
 
-import isshukan.com.bukatender.support.utils.APIUtils;
+import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.support.utils.GlobalVariable;
 
 /**
@@ -17,7 +17,7 @@ import isshukan.com.bukatender.support.utils.GlobalVariable;
  */
 public class TagDA {
     public void accessAPI(Response.Listener<String> listener, Response.ErrorListener errorListener, final Map<String, String> params){
-        StringRequest request = new StringRequest(Request.Method.POST, APIUtils.BASE_URL+APIUtils.TAG_END_POINT, listener, errorListener){
+        StringRequest request = new StringRequest(Request.Method.POST, ConstantAPI.BASE_URL+ ConstantAPI.TAG_END_POINT, listener, errorListener){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 return params;

@@ -32,8 +32,6 @@ public class LoginController {
         String password = activity.getPasswordET().getText().toString();
 
         Map<String, String> whereClause = new HashMap<>();
-        whereClause.put(ConstantAPI.USERNAME,username);
-        whereClause.put(ConstantAPI.PASSWORD,password);
 
         userDA.get(whereClause, new DACallback<User>() {
             @Override

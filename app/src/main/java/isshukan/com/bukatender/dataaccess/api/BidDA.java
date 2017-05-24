@@ -1,7 +1,5 @@
 package isshukan.com.bukatender.dataaccess.api;
 
-import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -16,7 +14,7 @@ import java.util.Map;
 
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
-import isshukan.com.bukatender.support.utils.APIUtils;
+import isshukan.com.bukatender.constant.ConstantAPI;
 
 /**
  * @author Muhammad Umar Farisi
@@ -27,22 +25,22 @@ public class BidDA {
     private String url;
 
     public BidDA(){
-        url = APIUtils.BASE_URL + APIUtils.BID_END_POINT;
+        url = ConstantAPI.BASE_URL + ConstantAPI.BID_END_POINT;
     }
 
     public void getTenderBid(int tenderId, final DACallback<List<Bid>> callback){
         Map<String, String> parms = new HashMap<>();
-        parms.put(APIUtils.METHOD, APIUtils.METHOD_READ);
-        parms.put(APIUtils.TENDER_ID, String.valueOf(tenderId) );
+        parms.put(ConstantAPI.METHOD, ConstantAPI.METHOD_READ);
+        parms.put(ConstantAPI.TENDER_ID, String.valueOf(tenderId) );
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 List<Bid> bids = new ArrayList<>();
                 try {
                     JSONObject responseJO = new JSONObject(response);
-                    String status =responseJO.getString(APIUtils.STATUS);
-                    if(status.equals(APIUtils.STATUS_SUCCESS)){
-                        parserJSONToListOfBid(responseJO.getJSONArray(APIUtils.DATA), bids);
+                    String status =responseJO.getString(ConstantAPI.STATUS);
+                    if(status.equals(ConstantAPI.STATUS_SUCCESS)){
+                        parserJSONToListOfBid(responseJO.getJSONArray(ConstantAPI.DATA), bids);
                         callback.onSuccess(bids);
                     }else{
                         callback.onFailure("STATUS IS FAILED");
@@ -61,17 +59,17 @@ public class BidDA {
 
     public void getUserBid(String userBidId, final DACallback<List<Bid>> callback){
         Map<String, String> parms = new HashMap<>();
-        parms.put(APIUtils.METHOD, APIUtils.METHOD_READ);
-        parms.put(APIUtils.USER_BID_ID, String.valueOf(userBidId) );
+        parms.put(ConstantAPI.METHOD, ConstantAPI.METHOD_READ);
+        parms.put(ConstantAPI.USER_BID_ID, String.valueOf(userBidId) );
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 List<Bid> bids = new ArrayList<>();
                 try {
                     JSONObject responseJO = new JSONObject(response);
-                    String status =responseJO.getString(APIUtils.STATUS);
-                    if(status.equals(APIUtils.STATUS_SUCCESS)){
-                        parserJSONToListOfBid(responseJO.getJSONArray(APIUtils.DATA), bids);
+                    String status =responseJO.getString(ConstantAPI.STATUS);
+                    if(status.equals(ConstantAPI.STATUS_SUCCESS)){
+                        parserJSONToListOfBid(responseJO.getJSONArray(ConstantAPI.DATA), bids);
                         callback.onSuccess(bids);
                     }else{
                         callback.onFailure("STATUS IS FAILED");
@@ -91,14 +89,14 @@ public class BidDA {
     private void parserJSONToListOfBid(JSONArray dataJA, List<Bid> bids) throws JSONException {
         for(int i = 0 ; i < dataJA.length() ; i++){
             JSONObject dataJO = dataJA.getJSONObject(i);
-            int tenderId = dataJO.getInt(APIUtils.TENDER_ID);
-            String productId = dataJO.getString(APIUtils.PRODUCT_ID);
-            String userTenderId = dataJO.getString(APIUtils.USER_TENDER_ID);
-            String userBidId = dataJO.getString(APIUtils.USER_BID_ID);
-            String imageResource = dataJO.getString(APIUtils.IMAGE_RESOURCE);
-            String titleProduct = dataJO.getString(APIUtils.TITLE_PRODUCT);
-            double bidPrice = dataJO.getDouble(APIUtils.BID_PRICE);
-            String shortDescription = dataJO.getString(APIUtils.SHORT_DESCRIPTION);
+            int tenderId = dataJO.getInt(ConstantAPI.TENDER_ID);
+            String productId = dataJO.getString(ConstantAPI.PRODUCT_ID);
+            String userTenderId = dataJO.getString(ConstantAPI.USER_TENDER_ID);
+            String userBidId = dataJO.getString(ConstantAPI.USER_BID_ID);
+            String imageResource = dataJO.getString(ConstantAPI.IMAGE_RESOURCE);
+            String titleProduct = dataJO.getString(ConstantAPI.TITLE_PRODUCT);
+            double bidPrice = dataJO.getDouble(ConstantAPI.BID_PRICE);
+            String shortDescription = dataJO.getString(ConstantAPI.SHORT_DESCRIPTION);
             bids.add(new Bid(tenderId, productId, userTenderId, userBidId, imageResource, titleProduct, bidPrice, shortDescription));
         }
     }

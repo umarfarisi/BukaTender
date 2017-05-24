@@ -30,11 +30,6 @@ public class UserDA implements BaseDA<User> {
 
     @Override
     public void get(Map<String, String> whereClauses, DACallback<User> callback) {
-        if(whereClauses.get(ConstantAPI.USERNAME).equals("umarfarisi") && whereClauses.get(ConstantAPI.PASSWORD).equals("123")){
-            callback.onSuccess(new User("Muhammad Umar Farisi","pharese@gmail.com","085711122365","username","123"));
-        }else{
-            callback.onFailure("failed to get user");
-        }
         //TODO IMPLEMENT WITH ASYNTASK
     }
 

@@ -11,11 +11,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
-import isshukan.com.bukatender.support.utils.APIUtils;
+import isshukan.com.bukatender.constant.ConstantAPI;
 
 /**
  * @author Muhammad Umar Farisi
@@ -26,18 +25,18 @@ public class TenderDA {
     private String url;
 
     public TenderDA(){
-        url = APIUtils.BASE_URL+APIUtils.TENDER_END_POINT;
+        url = ConstantAPI.BASE_URL+ ConstantAPI.TENDER_END_POINT;
     }
 
     public void createTender(Tender newTender){
         Map<String,String> params = new HashMap<>();
-        params.put(APIUtils.METHOD , APIUtils.METHOD_CREATE);
-        params.put(APIUtils.TENDER_ID, String.valueOf(newTender.getTenderId()));
-        params.put(APIUtils.USER_ID, newTender.getUserId());
-        params.put(APIUtils.TITLE, newTender.getTitle());
-        params.put(APIUtils.VALIDITY_PERIOD, String.valueOf(newTender.getValidityPeriod()));
-        params.put(APIUtils.STARTING_PRICE, String.valueOf(newTender.getStartingPrice()));
-        params.put(APIUtils.IMAGE_RESOURCE, newTender.getImageResource());
+        params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_CREATE);
+        params.put(ConstantAPI.TENDER_ID, String.valueOf(newTender.getTenderId()));
+        params.put(ConstantAPI.USER_ID, newTender.getUserId());
+        params.put(ConstantAPI.TITLE, newTender.getTitle());
+        params.put(ConstantAPI.VALIDITY_PERIOD, String.valueOf(newTender.getValidityPeriod()));
+        params.put(ConstantAPI.STARTING_PRICE, String.valueOf(newTender.getStartingPrice()));
+        params.put(ConstantAPI.IMAGE_RESOURCE, newTender.getImageResource());
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -53,16 +52,16 @@ public class TenderDA {
 
     public void getAllTender(final DACallback<List<Tender>> callback){
         Map<String,String> params = new HashMap<>();
-        params.put(APIUtils.METHOD , APIUtils.METHOD_READ);
+        params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_READ);
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 List<Tender> tenders = new ArrayList<>();
                 try {
                     JSONObject responseJO = new JSONObject(response);
-                    String status =responseJO.getString(APIUtils.STATUS);
-                    if(status.equals(APIUtils.STATUS_SUCCESS)){
-                        parserData(responseJO.getJSONArray(APIUtils.DATA), tenders);
+                    String status =responseJO.getString(ConstantAPI.STATUS);
+                    if(status.equals(ConstantAPI.STATUS_SUCCESS)){
+                        parserData(responseJO.getJSONArray(ConstantAPI.DATA), tenders);
                         callback.onSuccess(tenders);
                     }else{
                         callback.onFailure("ERROR: STATUC FAILED");
@@ -81,17 +80,17 @@ public class TenderDA {
 
     public void getUserTender(String userId, final DACallback<List<Tender>> callback){
         Map<String,String> params = new HashMap<>();
-        params.put(APIUtils.METHOD , APIUtils.METHOD_READ);
-        params.put(APIUtils.USER_ID, userId);
+        params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_READ);
+        params.put(ConstantAPI.USER_ID, userId);
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 List<Tender> tenders = new ArrayList<>();
                 try {
                     JSONObject responseJO = new JSONObject(response);
-                    String status =responseJO.getString(APIUtils.STATUS);
-                    if(status.equals(APIUtils.STATUS_SUCCESS)){
-                        parserData(responseJO.getJSONArray(APIUtils.DATA), tenders);
+                    String status =responseJO.getString(ConstantAPI.STATUS);
+                    if(status.equals(ConstantAPI.STATUS_SUCCESS)){
+                        parserData(responseJO.getJSONArray(ConstantAPI.DATA), tenders);
                         callback.onSuccess(tenders);
                     }else{
                         callback.onFailure("ERROR: STATUC FAILED");
@@ -110,13 +109,13 @@ public class TenderDA {
 
     public void updateTender(Tender oldTender, Tender newTender){
         Map<String,String> params = new HashMap<>();
-        params.put(APIUtils.METHOD , APIUtils.METHOD_UPDATE);
-        params.put(APIUtils.TENDER_ID, String.valueOf(oldTender.getTenderId()));
-        params.put(APIUtils.USER_ID, oldTender.getUserId());
-        params.put(APIUtils.TITLE, newTender.getTitle());
-        params.put(APIUtils.VALIDITY_PERIOD, String.valueOf(newTender.getValidityPeriod()));
-        params.put(APIUtils.STARTING_PRICE, String.valueOf(newTender.getStartingPrice()));
-        params.put(APIUtils.IMAGE_RESOURCE, newTender.getImageResource());
+        params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_UPDATE);
+        params.put(ConstantAPI.TENDER_ID, String.valueOf(oldTender.getTenderId()));
+        params.put(ConstantAPI.USER_ID, oldTender.getUserId());
+        params.put(ConstantAPI.TITLE, newTender.getTitle());
+        params.put(ConstantAPI.VALIDITY_PERIOD, String.valueOf(newTender.getValidityPeriod()));
+        params.put(ConstantAPI.STARTING_PRICE, String.valueOf(newTender.getStartingPrice()));
+        params.put(ConstantAPI.IMAGE_RESOURCE, newTender.getImageResource());
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -132,9 +131,9 @@ public class TenderDA {
 
     public void deleteTender(Tender tender){
         Map<String,String> params = new HashMap<>();
-        params.put(APIUtils.METHOD , APIUtils.METHOD_DELETE);
-        params.put(APIUtils.TENDER_ID, String.valueOf(tender.getTenderId()));
-        params.put(APIUtils.USER_ID, tender.getUserId());
+        params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_DELETE);
+        params.put(ConstantAPI.TENDER_ID, String.valueOf(tender.getTenderId()));
+        params.put(ConstantAPI.USER_ID, tender.getUserId());
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -151,12 +150,12 @@ public class TenderDA {
     private void parserData(JSONArray dataJA, List<Tender> tenders) throws JSONException{
         for(int i = 0 ; i < dataJA.length() ; i++){
             JSONObject dataJO = dataJA.getJSONObject(i);
-            int tenderId = dataJO.getInt(APIUtils.TENDER_ID);
-            String userId = dataJO.getString(APIUtils.USER_ID);
-            String title = dataJO.getString(APIUtils.TITLE);
-            long validityPeriod = dataJO.getLong(APIUtils.VALIDITY_PERIOD);
-            int startingPrice = dataJO.getInt(APIUtils.STARTING_PRICE);
-            String imageResource = dataJO.getString(APIUtils.IMAGE_RESOURCE);
+            int tenderId = dataJO.getInt(ConstantAPI.TENDER_ID);
+            String userId = dataJO.getString(ConstantAPI.USER_ID);
+            String title = dataJO.getString(ConstantAPI.TITLE);
+            long validityPeriod = dataJO.getLong(ConstantAPI.VALIDITY_PERIOD);
+            int startingPrice = dataJO.getInt(ConstantAPI.STARTING_PRICE);
+            String imageResource = dataJO.getString(ConstantAPI.IMAGE_RESOURCE);
             tenders.add(new Tender(tenderId,userId,title,validityPeriod,startingPrice,imageResource));
         }
     }
