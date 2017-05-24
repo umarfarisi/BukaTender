@@ -8,7 +8,7 @@ import java.util.List;
  * @created 22/05/2017
  */
 public class Tender {
-    private String tenderId;
+    private int tenderId;
     private String userId;
     private String title;
     private long validityPeriod;
@@ -16,7 +16,7 @@ public class Tender {
     private String imageResource;
     private List<String> tag;
 
-    public Tender(String tenderId, String userId, String title, long validityPeriod, double startingPrice, String imageResource) {
+    public Tender(int tenderId, String userId, String title, long validityPeriod, double startingPrice, String imageResource) {
         this.tenderId = tenderId;
         this.userId = userId;
         this.title = title;
@@ -29,11 +29,11 @@ public class Tender {
     public Tender() {
     }
 
-    public String getTenderId() {
+    public int getTenderId() {
         return tenderId;
     }
 
-    public void setTenderId(String tenderId) {
+    public void setTenderId(int tenderId) {
         this.tenderId = tenderId;
     }
 
@@ -92,14 +92,14 @@ public class Tender {
 
         Tender tender = (Tender) o;
 
-        if (!tenderId.equals(tender.tenderId)) return false;
+        if (tenderId != tender.tenderId) return false;
         return userId.equals(tender.userId);
 
     }
 
     @Override
     public int hashCode() {
-        int result = tenderId.hashCode();
+        int result = tenderId;
         result = 31 * result + userId.hashCode();
         return result;
     }

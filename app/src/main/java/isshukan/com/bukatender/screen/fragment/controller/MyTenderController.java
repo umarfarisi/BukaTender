@@ -60,7 +60,7 @@ public class MyTenderController implements Response.Listener<String> , Response.
     private void parserData(JSONArray dataJA) throws JSONException{
         for(int i = 0 ; i < dataJA.length() ; i++){
             JSONObject dataJO = dataJA.getJSONObject(i);
-            String tenderId = dataJO.getString(APIUtils.TENDER_ID);
+            int tenderId = dataJO.getInt(APIUtils.TENDER_ID);
             String userId = dataJO.getString(APIUtils.USER_ID);
             String title = dataJO.getString(APIUtils.TITLE);
             long validityPeriod = dataJO.getLong(APIUtils.VALIDITY_PERIOD);
