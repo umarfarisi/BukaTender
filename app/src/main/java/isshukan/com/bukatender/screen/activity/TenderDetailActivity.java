@@ -17,7 +17,7 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
     private TextView startingPriceTextView;
     private TextView tagTextView;
     private FloatingActionButton actionFloatingActionButton;
-    private Button listOfBidButton;
+    private Button listBidButton;
 
     private TenderDetailController controller;
 
@@ -30,12 +30,12 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
         startingPriceTextView = (TextView) findViewById(R.id.startingPriceTextView);
         tagTextView = (TextView) findViewById(R.id.tagTextView);
         actionFloatingActionButton = (FloatingActionButton) findViewById(R.id.actionFloatingActionButton);
-        listOfBidButton = (Button) findViewById(R.id.listOfBidButton);
+        listBidButton = (Button) findViewById(R.id.listBidButton);
     }
 
     @Override
     public void setDefaultSetting() {
-        listOfBidButton.setOnClickListener(this);
+        listBidButton.setOnClickListener(this);
         actionFloatingActionButton.setOnClickListener(this);
         controller = new TenderDetailController(this);
     }
@@ -62,11 +62,13 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public boolean isControllerNotNull() {
-        return false;
+        return controller != null;
     }
 
     @Override
     public void onClick(View v) {
-
+        if(isControllerNotNull()){
+            controller.onClick(v.getId());
+        }
     }
 }

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:background="@mipmap/ic_launcher"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:id="@+id/photoImageView"/>
+
+    <TextView
+        android:text="JUDUL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/titleTextView"/>
+
+    <TextView
+        android:text="Rp 10.000.000 ,00"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/priceTextView"/>
+
+    <TextView
+        android:text="DESKRIPSI"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/shortDescriptionTextView"/>
+
+</LinearLayout>

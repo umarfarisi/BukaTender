@@ -11,17 +11,17 @@ public class Bid {
     private String userBidId;
     private String imageResource;
     private String titleProduct;
-    private double bidProduct;
+    private double bidPrice;
     private String shortDescription;
 
-    public Bid(int tenderId, String productId, String userTenderId, String userBidId, String imageResource, String titleProduct, double bidProduct, String shortDescription) {
+    public Bid(int tenderId, String productId, String userTenderId, String userBidId, String imageResource, String titleProduct, double bidPrice, String shortDescription) {
         this.tenderId = tenderId;
         this.productId = productId;
         this.userTenderId = userTenderId;
         this.userBidId = userBidId;
         this.imageResource = imageResource;
         this.titleProduct = titleProduct;
-        this.bidProduct = bidProduct;
+        this.bidPrice = bidPrice;
         this.shortDescription = shortDescription;
     }
 
@@ -73,12 +73,12 @@ public class Bid {
         this.titleProduct = titleProduct;
     }
 
-    public double getBidProduct() {
-        return bidProduct;
+    public double getBidPrice() {
+        return bidPrice;
     }
 
-    public void setBidProduct(double bidProduct) {
-        this.bidProduct = bidProduct;
+    public void setBidPrice(double bidPrice) {
+        this.bidPrice = bidPrice;
     }
 
     public String getShortDescription() {
@@ -121,7 +121,7 @@ public class Bid {
                 ", userBidId='" + userBidId + '\'' +
                 ", imageResource='" + imageResource + '\'' +
                 ", titleProduct='" + titleProduct + '\'' +
-                ", bidProduct=" + bidProduct +
+                ", bidPrice=" + bidPrice +
                 ", shortDescription='" + shortDescription + '\'' +
                 '}';
     }
