@@ -17,6 +17,7 @@ import java.util.Map;
 
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.dataaccess.api.TenderDA;
+import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
 import isshukan.com.bukatender.screen.fragment.TenderFragment;
@@ -26,8 +27,7 @@ import isshukan.com.bukatender.support.utils.APIUtils;
  * @author Muhammad Umar Farisi
  * @created 09/05/2017
  */
-public class TenderController implements Response.Listener<String>, Response.ErrorListener {
-
+public class TenderController{
     private TenderFragment fragment;
     private TenderDA tenderDA;
 
@@ -41,40 +41,17 @@ public class TenderController implements Response.Listener<String>, Response.Err
     private void loadData() {
         tenders = new ArrayList<>();
         tenderDA = new TenderDA();
-        tenderDA.getAllTender(this, this);
-    }
-
-    @Override
-    public void onResponse(String response) {
-        try {
-            JSONObject responseJO = new JSONObject(response);
-            String status =responseJO.getString(APIUtils.STATUS);
-            if(status.equals(APIUtils.STATUS_SUCCESS)){
-                parserData(responseJO.getJSONArray(APIUtils.DATA));
+        tenderDA.getAllTender(new DACallback<List<Tender>>() {
+            @Override
+            public void onSuccess(List<Tender> tenders) {
+                fragment.configureRecyclerView(tenders);
             }
-        } catch (JSONException e) {
 
-        }finally {
-            fragment.configureRecyclerView(tenders);
-        }
-    }
-
-    private void parserData(JSONArray dataJA) throws JSONException{
-        for(int i = 0 ; i < dataJA.length() ; i++){
-            JSONObject dataJO = dataJA.getJSONObject(i);
-            int tenderId = dataJO.getInt(APIUtils.TENDER_ID);
-            String userId = dataJO.getString(APIUtils.USER_ID);
-            String title = dataJO.getString(APIUtils.TITLE);
-            long validityPeriod = dataJO.getLong(APIUtils.VALIDITY_PERIOD);
-            int startingPrice = dataJO.getInt(APIUtils.STARTING_PRICE);
-            String imageResource = dataJO.getString(APIUtils.IMAGE_RESOURCE);
-            tenders.add(new Tender(tenderId,userId,title,validityPeriod,startingPrice,imageResource));
-        }
-    }
-
-    @Override
-    public void onErrorResponse(VolleyError error) {
-        Toast.makeText(fragment.getContext(),"Error: "+error.getMessage(),Toast.LENGTH_SHORT).show();
+            @Override
+            public void onFailure(String message) {
+                Toast.makeText(fragment.getContext(),message,Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     public void onTenderChoose(int position) {
