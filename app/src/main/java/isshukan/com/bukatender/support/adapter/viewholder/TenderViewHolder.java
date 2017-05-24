@@ -56,6 +56,8 @@ public class TenderViewHolder extends RecyclerView.ViewHolder implements View.On
 
     @Override
     public void onClick(View v) {
-        listener.onTenderChoose(position);
+        if(position != -1){
+            listener.onTenderChoose(position);
+        }
     }
 }
