@@ -44,8 +44,7 @@ public class TenderDetailController {
         switch (id){
             case R.id.listBidButton:
                 Intent intent = new Intent(activity, ListBidActivity.class);
-                intent.putExtra(Constant.TENDER_ID, tender.getTenderId());
-                intent.putExtra(Constant.USER_ID, tender.getUserId());
+                intent.putExtra(Constant.TENDER, tender);
                 activity.startActivity(intent);
                 break;
             case R.id.actionFloatingActionButton:
