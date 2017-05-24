@@ -26,5 +26,10 @@ public class APIUtils {
     public static final String VALIDITY_PERIOD = "validity_period";
     public static final String STARTING_PRICE = "starting_price";
     public static final String IMAGE_RESOURCE = "image_resource";
-
+    public static final String PRODUCT_ID = "product_id";
+    public static final String USER_TENDER_ID = "user_tender_id";
+    public static final String USER_BID_ID = "user_bid_id";
+    public static final String TITLE_PRODUCT = "title_product";
+    public static final String BID_PRICE = "bid_price";
+    public static final String SHORT_DESCRIPTION = "short_description";
 }
