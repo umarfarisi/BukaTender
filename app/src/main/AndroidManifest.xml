@@ -19,8 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".screen.activity.MainActivity" />
-        <activity android:name=".screen.activity.TenderDetailActivity" />
-        <activity android:name=".screen.activity.ListBidActivity"></activity>
+        <activity android:name=".screen.activity.ListProductsActivity"></activity>
     </application>
 
 </manifest>
