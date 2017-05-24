@@ -34,7 +34,7 @@ public class ListBidController {
 
     private void loadIntent() {
         Intent intent = activity.getIntent();
-        tender = (Tender) intent.getSerializableExtra(Constant.TENDER_ID);
+        tender = (Tender) intent.getSerializableExtra(Constant.TENDER);
     }
 
     private void loadData() {
