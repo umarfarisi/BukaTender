@@ -10,8 +10,10 @@ import com.squareup.picasso.Picasso;
 import java.util.Date;
 
 import isshukan.com.bukatender.R;
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.support.adapter.viewholder.listener.TenderListener;
+import isshukan.com.bukatender.support.utils.Formatter;
 
 /**
  * @author Muhammad Umar Farisi
@@ -48,9 +50,9 @@ public class TenderViewHolder extends RecyclerView.ViewHolder implements View.On
     public void setData(Tender tender, int position){
         Picasso.with(itemView.getContext()).load(tender.getImageResource()).into(photoImageView);
         titleTextView.setText(tender.getTitle());
-        validityPeriodTextView.setText(new Date(tender.getValidityPeriod()).toString());
+        validityPeriodTextView.setText(Formatter.dateFormatter(tender.getValidityPeriod()));
         tagTextView.setText(tender.getTag().toString());
-        startingPriceTextView.setText("RP "+tender.getStartingPrice());
+        startingPriceTextView.setText(Formatter.priceFormatter(tender.getStartingPrice()));
         this.position = position;
     }
 

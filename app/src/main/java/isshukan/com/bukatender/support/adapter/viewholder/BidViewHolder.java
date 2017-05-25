@@ -10,6 +10,7 @@ import com.squareup.picasso.Picasso;
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.model.Bid;
 import isshukan.com.bukatender.support.adapter.viewholder.listener.BidListener;
+import isshukan.com.bukatender.support.utils.Formatter;
 
 /**
  * @author Muhammad Umar Farisi
@@ -44,7 +45,7 @@ public class BidViewHolder extends RecyclerView.ViewHolder implements View.OnCli
     public void setData(Bid bid , int position){
         Picasso.with(itemView.getContext()).load(bid.getImageResource()).into(photoImageView);
         titleTextView.setText(bid.getTitleProduct());
-        priceTextView.setText("Rp "+bid.getBidPrice());
+        priceTextView.setText(Formatter.priceFormatter(bid.getBidPrice()));
         shortDescriptionTextView.setText(bid.getShortDescription());
         this.position = position;
     }

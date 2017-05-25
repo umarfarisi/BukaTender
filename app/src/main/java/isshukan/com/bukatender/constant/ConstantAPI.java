@@ -32,4 +32,5 @@ public class ConstantAPI {
     public static final String TITLE_PRODUCT = "title_product";
     public static final String BID_PRICE = "bid_price";
     public static final String SHORT_DESCRIPTION = "short_description";
+    public static final String TAG = "tag";
 }

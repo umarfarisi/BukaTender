@@ -2,6 +2,8 @@ package isshukan.com.bukatender.screen.activity.controller;
 
 import android.content.Intent;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.Date;
 
 import isshukan.com.bukatender.R;
@@ -9,6 +11,7 @@ import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.ListBidActivity;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
+import isshukan.com.bukatender.support.utils.Formatter;
 
 /**
  * @author Muhammad Umar Farisi
@@ -29,10 +32,10 @@ public class TenderDetailController {
     private void loadData() {
         activity.getSupportActionBar().setTitle(tender.getTitle());
         activity.getShortDescriptionTextView().setText(tender.getShortDescription());
-        activity.getValidityPeriodTextView().setText(new Date(tender.getValidityPeriod()).toString());
-        activity.getTagTextView().setText(tender.getTag().toString());
-        activity.getStartingPriceTextView().setText("Rp "+tender.getStartingPrice());
-
+        activity.getValidityPeriodTextView().setText("Expired date : "+Formatter.dateFormatter(tender.getValidityPeriod()));
+        activity.getTagTextView().setText("Tag : "+tender.getTag().toString());
+        activity.getStartingPriceTextView().setText("Starting price : "+Formatter.priceFormatter(tender.getStartingPrice()));
+        Picasso.with(activity).load(tender.getImageResource()).into(activity.getPhotoImageView());
     }
 
     private void handleIntent() {

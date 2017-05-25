@@ -1,5 +1,7 @@
 package isshukan.com.bukatender.dataaccess.api;
 
+import android.util.Log;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -56,6 +58,7 @@ public class TenderDA {
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                Log.d("RESPONSEEE","r>> "+response);
                 List<Tender> tenders = new ArrayList<>();
                 try {
                     JSONObject responseJO = new JSONObject(response);
@@ -74,6 +77,7 @@ public class TenderDA {
             @Override
             public void onErrorResponse(VolleyError error) {
                 callback.onFailure("ERROR: "+error.getMessage());
+                Log.d("RESPONSEEE","e>> "+error.getMessage());
             }
         }, params);
     }
@@ -156,7 +160,13 @@ public class TenderDA {
             long validityPeriod = dataJO.getLong(ConstantAPI.VALIDITY_PERIOD);
             int startingPrice = dataJO.getInt(ConstantAPI.STARTING_PRICE);
             String imageResource = dataJO.getString(ConstantAPI.IMAGE_RESOURCE);
-            tenders.add(new Tender(tenderId,userId,title,validityPeriod,startingPrice,imageResource));
+            String shortDescription = dataJO.getString(ConstantAPI.SHORT_DESCRIPTION);
+            JSONArray tagJA = dataJO.getJSONArray(ConstantAPI.TAG);
+            List<String> tags = new ArrayList<>();
+            for(int j = 0 ; j < tagJA.length() ; j++){
+                tags.add(tagJA.getString(j));
+            }
+            tenders.add(new Tender(tenderId,userId,title,validityPeriod,startingPrice,imageResource,shortDescription,tags));
         }
     }
 
