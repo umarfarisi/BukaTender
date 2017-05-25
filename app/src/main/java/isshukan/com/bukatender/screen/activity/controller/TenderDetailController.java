@@ -51,7 +51,9 @@ public class TenderDetailController {
         activity.getValidityPeriodTextView().setText("Expired date : "+Formatter.dateFormatter(tender.getValidityPeriod()));
         activity.getTagTextView().setText("Tag : "+tender.getTag().toString());
         activity.getStartingPriceTextView().setText("Starting price : "+Formatter.priceFormatter(tender.getStartingPrice()));
-        Picasso.with(activity).load(tender.getImageResource()).into(activity.getPhotoImageView());
+        if(tender.getImageResource() != null && !tender.getImageResource().isEmpty()){
+            Picasso.with(activity).load(tender.getImageResource()).into(activity.getPhotoImageView());
+        }
     }
 
     private void handleIntent() {
