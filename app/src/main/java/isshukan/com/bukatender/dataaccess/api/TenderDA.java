@@ -30,7 +30,7 @@ public class TenderDA {
         url = ConstantAPI.BASE_URL+ ConstantAPI.TENDER_END_POINT;
     }
 
-    public void createTender(Tender newTender){
+    public void createTender(Tender newTender, final DACallback<Boolean> callback){
         Map<String,String> params = new HashMap<>();
         params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_CREATE);
         params.put(ConstantAPI.TENDER_ID, String.valueOf(newTender.getTenderId()));
@@ -42,12 +42,18 @@ public class TenderDA {
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //TODO
+                try {
+                    JSONObject responseJO = new JSONObject(response);
+                    String status = responseJO.getString(ConstantAPI.STATUS);
+                    callback.onSuccess(status.equals(ConstantAPI.STATUS_SUCCESS));
+                } catch (JSONException e) {
+                    callback.onFailure("ERROR: "+e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //TODO
+                callback.onFailure("ERROR: "+error.getMessage());
             }
         }, params);
     }
@@ -58,7 +64,6 @@ public class TenderDA {
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("RESPONSEEE","r>> "+response);
                 List<Tender> tenders = new ArrayList<>();
                 try {
                     JSONObject responseJO = new JSONObject(response);
@@ -111,7 +116,7 @@ public class TenderDA {
         }, params);
     }
 
-    public void updateTender(Tender oldTender, Tender newTender){
+    public void updateTender(Tender oldTender, Tender newTender, final DACallback<Boolean> callback){
         Map<String,String> params = new HashMap<>();
         params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_UPDATE);
         params.put(ConstantAPI.TENDER_ID, String.valueOf(oldTender.getTenderId()));
@@ -120,15 +125,23 @@ public class TenderDA {
         params.put(ConstantAPI.VALIDITY_PERIOD, String.valueOf(newTender.getValidityPeriod()));
         params.put(ConstantAPI.STARTING_PRICE, String.valueOf(newTender.getStartingPrice()));
         params.put(ConstantAPI.IMAGE_RESOURCE, newTender.getImageResource());
+        params.put(ConstantAPI.SHORT_DESCRIPTION, newTender.getShortDescription());
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //TODO
+                Log.d("RESPONSEEUPDATE",">> "+response);
+                try {
+                    JSONObject responseJO = new JSONObject(response);
+                    String status = responseJO.getString(ConstantAPI.STATUS);
+                    callback.onSuccess(status.equals(ConstantAPI.STATUS_SUCCESS));
+                } catch (JSONException e) {
+                    callback.onFailure("ERROR: "+e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //TODO
+                callback.onFailure("ERROR: "+error.getMessage());
             }
         }, params);
     }

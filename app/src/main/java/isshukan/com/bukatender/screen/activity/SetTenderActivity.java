@@ -1,14 +1,13 @@
 package isshukan.com.bukatender.screen.activity;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.TextView;
 
 import java.util.Calendar;
-import java.util.Date;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.screen.activity.controller.SetTenderController;
@@ -85,6 +84,14 @@ public class SetTenderActivity extends BaseActivity implements View.OnClickListe
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
         if(isControllerNotNull()){
             controller.onValidityPeriodChange(year, month, dayOfMonth);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(isControllerNotNull()){
+            controller.onImageChange(requestCode, resultCode, data);
         }
     }
 }
