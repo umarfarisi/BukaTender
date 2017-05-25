@@ -1,6 +1,11 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
+import android.app.TimePickerDialog;
 import android.content.Intent;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
@@ -22,6 +27,9 @@ public class SetTenderController {
         this.activity = activity;
         loadIntent();
         loadData();
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(new Date(newTender.getValidityPeriod()));
+        activity.configureDatePickerDialog(calendar);
     }
 
     private void loadData() {
@@ -45,7 +53,10 @@ public class SetTenderController {
     public void onClick(int id) {
         switch (id){
             case R.id.validityPeriodButton:
-                //TODO
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(new Date(newTender.getValidityPeriod()));
+                activity.getDatePickerDialog().updateDate(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+                activity.getDatePickerDialog().show();
                 break;
             case R.id.imageResourceButton:
                 //TODO
@@ -64,4 +75,8 @@ public class SetTenderController {
         return oldTender != null;
     }
 
+    public void onValidityPeriodChange(int year, int month, int dayOfMonth) {
+        Calendar calendar = new GregorianCalendar(year, month, dayOfMonth);
+        newTender.setValidityPeriod(calendar.getTime().getTime());
+    }
 }
