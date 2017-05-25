@@ -30,7 +30,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         controller = new LoginController(this);
         loginBtn.setOnClickListener(this);
 
-        if(Authentication.getUserId() != null){
+        if(Authentication.getUserId() != null && Authentication.getUserToken() != null){
             startActivity(new Intent(this, MainActivity.class));
         }
 

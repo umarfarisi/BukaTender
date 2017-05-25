@@ -25,6 +25,19 @@ public class APIHelper {
         Volley.newRequestQueue(GlobalVariable.APP_CONTEXT).add(request);
     }
 
+    public static void post(String url , Response.Listener<String> listener, Response.ErrorListener errorListener, final Map<String, String> params, final Map<String, String> header){
+        StringRequest request = new StringRequest(Request.Method.POST, url, listener, errorListener){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                return params;
+            }
+            @Override
+            public Map<String, String> getHeaders() {
+                return header;
+            }
+        };
+        Volley.newRequestQueue(GlobalVariable.APP_CONTEXT).add(request);
+    }
 
     public static void get(String url ,Response.Listener<String> listener, Response.ErrorListener errorListener){
         StringRequest request = new StringRequest(Request.Method.GET, url, listener, errorListener);
