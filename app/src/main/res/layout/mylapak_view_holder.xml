@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardElevation="@dimen/margin_standard"
+    app:contentPadding="@dimen/margin_standard"
+    android:layout_margin="@dimen/margin_standard">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginRight="@dimen/margin_standard"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:id="@+id/mylapakImageView"/>
+
+        <RelativeLayout
+            android:layout_marginLeft="@dimen/margin_standard"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="100dp">
+
+            <TextView
+                android:textStyle="bold"
+                android:textAppearance="?android:textAppearanceLarge"
+                android:text="Nama Barang"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:id="@+id/mylapakTitleTextView"/>
+
+            <TextView
+                android:textAppearance="?android:textAppearanceSmall"
+                android:text="Price"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/mylapakTitleTextView"
+                android:id="@+id/mylapakPriceTextView"/>
+
+            <TextView
+                android:textAppearance="?android:textAppearanceMedium"
+                android:text="Description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/mylapakDescriptionTextView"
+                android:layout_below="@+id/mylapakPriceTextView"/>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -1,0 +1,9 @@
+package isshukan.com.bukatender.support.adapter.viewholder.listener;
+
+/**
+ * Created by - on 25/05/2017.
+ */
+
+public interface MylapakListener {
+    void onMylapakChoose(int position);
+}
