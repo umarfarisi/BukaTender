@@ -11,6 +11,7 @@ import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
 import isshukan.com.bukatender.screen.fragment.MyTenderFragment;
+import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
  * @author Muhammad Umar Farisi
@@ -31,9 +32,7 @@ public class MyTenderController{
 
     private void loadData(){
         tenderDA = new TenderDA();
-        //TODO change userId
-        String userId = "123";
-        tenderDA.getUserTender(userId, new DACallback<List<Tender>>() {
+        tenderDA.getUserTender(Authentication.getUserId(), new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
                 MyTenderController.this.tenders = tenders;

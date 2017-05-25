@@ -9,6 +9,7 @@ import isshukan.com.bukatender.dataaccess.api.BidDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
 import isshukan.com.bukatender.screen.fragment.MyBidFragment;
+import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
  * @author Muhammad Umar Farisi
@@ -29,7 +30,7 @@ public class MyBidController{
 
     private void loadData() {
         bidDA = new BidDA();
-        bidDA.getUserBid("123", new DACallback<List<Bid>>() {
+        bidDA.getUserBid(Authentication.getUserId(), new DACallback<List<Bid>>() {
             @Override
             public void onSuccess(List<Bid> bids) {
                 MyBidController.this.bids = bids;
