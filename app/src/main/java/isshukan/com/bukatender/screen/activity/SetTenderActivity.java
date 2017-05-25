@@ -49,6 +49,10 @@ public class SetTenderActivity extends BaseActivity implements View.OnClickListe
         return shortDescriptionTextView;
     }
 
+    public Button getActionButton() {
+        return actionButton;
+    }
+
     @Override
     public boolean isControllerNotNull() {
         return controller != null;

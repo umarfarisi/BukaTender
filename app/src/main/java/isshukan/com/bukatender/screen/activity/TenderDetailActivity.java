@@ -1,5 +1,6 @@
 package isshukan.com.bukatender.screen.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.Button;
@@ -60,6 +61,10 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
         return tagTextView;
     }
 
+    public FloatingActionButton getActionFloatingActionButton() {
+        return actionFloatingActionButton;
+    }
+
     @Override
     public boolean isControllerNotNull() {
         return controller != null;
@@ -69,6 +74,14 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         if(isControllerNotNull()){
             controller.onClick(v.getId());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(isControllerNotNull()){
+            controller.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

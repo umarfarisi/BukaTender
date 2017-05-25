@@ -7,6 +7,7 @@ import android.widget.EditText;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.screen.activity.controller.LoginController;
+import isshukan.com.bukatender.support.utils.Authentication;
 
 public class LoginActivity extends BaseActivity implements View.OnClickListener {
 
@@ -29,7 +30,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         controller = new LoginController(this);
         loginBtn.setOnClickListener(this);
 
-        startActivity(new Intent(this, MainActivity.class));
+        if(Authentication.getUserId() != null){
+            startActivity(new Intent(this, MainActivity.class));
+        }
 
     }
 
@@ -42,6 +45,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         if(isControllerNotNull()){
             controller.login();
+            Authentication.setUserId("123");
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 

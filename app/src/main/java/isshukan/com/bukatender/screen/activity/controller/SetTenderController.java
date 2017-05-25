@@ -25,13 +25,15 @@ public class SetTenderController {
     }
 
     private void loadData() {
-        if(isSaveMode()){
-            activity.getTitleTextView().setHint(oldTender.getTitle());
+        if(isEditMode()){
+            activity.getTitleTextView().setText(oldTender.getTitle());
             activity.getStartingPriceTextView().setText(String.valueOf(oldTender.getStartingPrice()));
             activity.getShortDescriptionTextView().setText(oldTender.getShortDescription());
             newTender = new Tender(oldTender.getTenderId(), oldTender.getUserId(), oldTender.getTitle(), oldTender.getValidityPeriod(), oldTender.getStartingPrice(), oldTender.getImageResource(), oldTender.getShortDescription());
+            activity.getActionButton().setText("EDIT");
         }else{
             newTender = new Tender(-1, null, null, 0, 0, null, null);
+            activity.getActionButton().setText("SAVE");
         }
     }
 
@@ -57,9 +59,9 @@ public class SetTenderController {
         }
     }
 
-    private boolean isSaveMode(){
+    private boolean isEditMode(){
         //tidak ada oldTender yg dipassing lewat intent yg artinya buat oldTender baru
-        return oldTender == null;
+        return oldTender != null;
     }
 
 }

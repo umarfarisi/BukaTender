@@ -1,5 +1,7 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import com.squareup.picasso.Picasso;
@@ -10,7 +12,9 @@ import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.ListBidActivity;
+import isshukan.com.bukatender.screen.activity.SetTenderActivity;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
+import isshukan.com.bukatender.support.utils.Authentication;
 import isshukan.com.bukatender.support.utils.Formatter;
 
 /**
@@ -19,6 +23,7 @@ import isshukan.com.bukatender.support.utils.Formatter;
  */
 public class TenderDetailController {
 
+    private static final int EDIT_TENDER_REQ_CODE = 1;
     private TenderDetailActivity activity;
 
     private Tender tender;
@@ -27,6 +32,17 @@ public class TenderDetailController {
         this.activity = activity;
         handleIntent();
         loadData();
+        setDefaultSetting();
+    }
+
+    private void setDefaultSetting() {
+        if(tender.getUserId().equals(Authentication.getUserId())){
+            //Edit
+            activity.getActionFloatingActionButton().setImageResource(R.mipmap.ic_edit);
+        }else{
+            //Add
+            activity.getActionFloatingActionButton().setImageResource(R.mipmap.ic_add);
+        }
     }
 
     private void loadData() {
@@ -44,15 +60,33 @@ public class TenderDetailController {
     }
 
     public void onClick(int id) {
+        Intent intent;
         switch (id){
             case R.id.listBidButton:
-                Intent intent = new Intent(activity, ListBidActivity.class);
+                intent = new Intent(activity, ListBidActivity.class);
                 intent.putExtra(Constant.TENDER, tender);
                 activity.startActivity(intent);
                 break;
             case R.id.actionFloatingActionButton:
-                //TODO
+                boolean isTenderUser = tender.getUserId().equals(Authentication.getUserId());
+                if(isTenderUser){
+                    //Edit
+                    intent = new Intent(activity, SetTenderActivity.class);
+                    intent.putExtra(Constant.TENDER, tender);
+                    activity.startActivityForResult(intent, EDIT_TENDER_REQ_CODE);
+                }else{
+                    //Bid
+                }
                 break;
+        }
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == EDIT_TENDER_REQ_CODE){
+            if(resultCode == Activity.RESULT_OK){
+                this.tender = (Tender) data.getSerializableExtra(Constant.TENDER);
+                loadData();
+            }
         }
     }
 }
