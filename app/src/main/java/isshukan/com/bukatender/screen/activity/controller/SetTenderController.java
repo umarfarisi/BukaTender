@@ -53,7 +53,7 @@ public class SetTenderController {
             newTender = new Tender(oldTender.getTenderId(), oldTender.getUserId(), oldTender.getTitle(), oldTender.getValidityPeriod(), oldTender.getStartingPrice(), oldTender.getImageResource(), oldTender.getShortDescription(), oldTender.getTag());
             activity.getActionButton().setText("EDIT");
         }else{
-            newTender = new Tender(-1, Authentication.getUserId(), null, new Date().getTime(), 0, null, null);
+            newTender = new Tender(-1, Authentication.getUserId(), "", new Date().getTime(), 0, "", "");
             activity.getActionButton().setText("SAVE");
         }
     }
@@ -104,7 +104,11 @@ public class SetTenderController {
                     tenderDA.createTender(newTender, new DACallback<Boolean>() {
                         @Override
                         public void onSuccess(Boolean isSuccess) {
-                            //TODO
+                            if(isSuccess){
+                                activity.finish();
+                            }else{
+                                Toast.makeText(activity, "Failed to save data", Toast.LENGTH_LONG).show();
+                            }
                         }
 
                         @Override

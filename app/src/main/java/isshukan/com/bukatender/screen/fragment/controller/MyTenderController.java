@@ -36,7 +36,7 @@ public class MyTenderController{
     public void loadData() {
         fragment.getTenderRecyclerView().setVisibility(View.GONE);
         fragment.getProgressBar().setVisibility(View.VISIBLE);
-        tenderDA.getAllTender(new DACallback<List<Tender>>() {
+        tenderDA.getUserTender(Authentication.getUserId(),new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
                 MyTenderController.this.tenders = tenders;

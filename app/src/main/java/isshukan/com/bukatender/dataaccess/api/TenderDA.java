@@ -33,12 +33,12 @@ public class TenderDA {
     public void createTender(Tender newTender, final DACallback<Boolean> callback){
         Map<String,String> params = new HashMap<>();
         params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_CREATE);
-        params.put(ConstantAPI.TENDER_ID, String.valueOf(newTender.getTenderId()));
         params.put(ConstantAPI.USER_ID, newTender.getUserId());
         params.put(ConstantAPI.TITLE, newTender.getTitle());
         params.put(ConstantAPI.VALIDITY_PERIOD, String.valueOf(newTender.getValidityPeriod()));
         params.put(ConstantAPI.STARTING_PRICE, String.valueOf(newTender.getStartingPrice()));
         params.put(ConstantAPI.IMAGE_RESOURCE, newTender.getImageResource());
+        params.put(ConstantAPI.SHORT_DESCRIPTION, newTender.getShortDescription());
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
