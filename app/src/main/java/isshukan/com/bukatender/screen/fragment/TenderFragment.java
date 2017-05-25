@@ -90,6 +90,10 @@ public class TenderFragment extends BaseFragment{
         return emptyTextView;
     }
 
+    public RecyclerView getTenderRecyclerView() {
+        return tenderRecyclerView;
+    }
+
     @Override
     public boolean isControllerNotNull() {
         return controller != null;

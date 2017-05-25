@@ -29,6 +29,7 @@ public class TenderController{
     }
 
     public void loadData() {
+        fragment.getTenderRecyclerView().setVisibility(View.GONE);
         fragment.getProgressBar().setVisibility(View.VISIBLE);
         tenderDA.getAllTender(new DACallback<List<Tender>>() {
             @Override
@@ -39,6 +40,7 @@ public class TenderController{
                     fragment.getEmptyTextView().setVisibility(View.VISIBLE);
                 }else {
                     fragment.getEmptyTextView().setVisibility(View.GONE);
+                    fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
                 }
                 fragment.getProgressBar().setVisibility(View.GONE);
             }
@@ -50,6 +52,7 @@ public class TenderController{
                     fragment.getEmptyTextView().setVisibility(View.VISIBLE);
                 }else {
                     fragment.getEmptyTextView().setVisibility(View.GONE);
+                    fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
                 }
                 fragment.getProgressBar().setVisibility(View.GONE);
             }

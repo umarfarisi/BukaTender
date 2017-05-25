@@ -79,6 +79,10 @@ public class MyTenderFragment extends BaseFragment{
         return progressBar;
     }
 
+    public RecyclerView getTenderRecyclerView() {
+        return tenderRecyclerView;
+    }
+
     @Override
     public void setDefaultSetting() {
         controller = new MyTenderController(this);
