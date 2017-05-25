@@ -8,4 +8,5 @@ public class Constant {
     public static final String TENDER = "tender";
     public static final String TENDER_ID = "tender_id";
     public static final String USER_ID = "user_id";
+    public static final String USER_ID_SHARED_PREFERENCES = "user_id_shared_preferences";
 }
