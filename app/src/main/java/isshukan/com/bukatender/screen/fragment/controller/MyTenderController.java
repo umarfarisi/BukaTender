@@ -6,10 +6,12 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.dataaccess.api.TenderDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
+import isshukan.com.bukatender.screen.activity.SetTenderActivity;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
 import isshukan.com.bukatender.screen.fragment.MyTenderFragment;
 import isshukan.com.bukatender.support.utils.Authentication;
@@ -69,4 +71,11 @@ public class MyTenderController{
         fragment.startActivity(intent);
     }
 
+    public void onClick(int id) {
+        switch (id){
+            case R.id.addFloatingActionButton:
+                fragment.startActivity(new Intent(fragment.getActivity(), SetTenderActivity.class));
+                break;
+        }
+    }
 }

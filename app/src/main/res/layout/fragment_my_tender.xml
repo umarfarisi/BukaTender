@@ -26,4 +26,13 @@
         android:id="@+id/emptyTextView"
         android:text="@string/empty"/>
 
+    <android.support.design.widget.FloatingActionButton
+        android:layout_margin="@dimen/margin_large"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/ic_add"
+        android:id="@+id/addFloatingActionButton"/>
+
 </RelativeLayout>
