@@ -19,9 +19,21 @@ public class Authentication {
         editor.apply();
     }
 
+    public static void setUserToken(String userToken) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(Constant.USER_TOKEN, userToken);
+        editor.apply();
+    }
+
     public static void removeUserId(){
         SharedPreferences.Editor editor = preferences.edit();
-        editor.clear();
+        editor.remove(Constant.USER_ID);
+        editor.apply();
+    }
+
+    public static void removeUserToken() {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.remove(Constant.USER_TOKEN);
         editor.apply();
     }
 
@@ -29,4 +41,7 @@ public class Authentication {
         return preferences.getString(Constant.USER_ID, null);
     }
 
+    public static String getUserToken() {
+        return preferences.getString(Constant.USER_TOKEN, null);
+    }
 }
