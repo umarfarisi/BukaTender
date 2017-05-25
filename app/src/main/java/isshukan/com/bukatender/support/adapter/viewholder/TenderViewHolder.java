@@ -48,7 +48,9 @@ public class TenderViewHolder extends RecyclerView.ViewHolder implements View.On
     }
 
     public void setData(Tender tender, int position){
-        Picasso.with(itemView.getContext()).load(tender.getImageResource()).into(photoImageView);
+        if(tender.getImageResource() != null && !tender.getImageResource().isEmpty()){
+            Picasso.with(itemView.getContext()).load(tender.getImageResource()).into(photoImageView);
+        }
         titleTextView.setText(tender.getTitle());
         validityPeriodTextView.setText(Formatter.dateFormatter(tender.getValidityPeriod()));
         tagTextView.setText(tender.getTag().toString());

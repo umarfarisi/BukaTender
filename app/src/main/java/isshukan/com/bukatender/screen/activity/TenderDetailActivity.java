@@ -1,6 +1,9 @@
 package isshukan.com.bukatender.screen.activity;
 
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -40,6 +43,20 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
         controller = new TenderDetailController(this);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.tender_detail_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(isControllerNotNull()){
+            controller.onOptionItemSelected(item.getItemId());
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public ImageView getPhotoImageView() {
         return photoImageView;
     }
@@ -60,6 +77,10 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
         return tagTextView;
     }
 
+    public FloatingActionButton getActionFloatingActionButton() {
+        return actionFloatingActionButton;
+    }
+
     @Override
     public boolean isControllerNotNull() {
         return controller != null;
@@ -69,6 +90,14 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         if(isControllerNotNull()){
             controller.onClick(v.getId());
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(isControllerNotNull()){
+            controller.onActivityResult(requestCode, resultCode, data);
         }
     }
 }

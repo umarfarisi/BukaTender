@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class MyBidFragment extends BaseFragment{
 
     private View view;
     private RecyclerView bidRecyclerView;
+    private ProgressBar progressBar;
+    private TextView emptyTextView;
 
     private BidAdapter adapter;
 
@@ -48,13 +52,35 @@ public class MyBidFragment extends BaseFragment{
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if(isControllerNotNull()){
+            controller.loadData();
+        }
+    }
+
+    @Override
     public void loadViews() {
         bidRecyclerView = (RecyclerView) view.findViewById(R.id.bidRecyclerView);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        emptyTextView = (TextView) view.findViewById(R.id.emptyTextView);
     }
 
     @Override
     public void setDefaultSetting() {
         controller = new MyBidController(this);
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public TextView getEmptyTextView() {
+        return emptyTextView;
+    }
+
+    public RecyclerView getBidRecyclerView() {
+        return bidRecyclerView;
     }
 
     public void configureRecyclerView(List<Bid> bids){

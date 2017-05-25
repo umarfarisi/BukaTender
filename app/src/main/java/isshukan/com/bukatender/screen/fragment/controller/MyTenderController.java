@@ -1,16 +1,20 @@
 package isshukan.com.bukatender.screen.fragment.controller;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
+import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.dataaccess.api.TenderDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
+import isshukan.com.bukatender.screen.activity.SetTenderActivity;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
 import isshukan.com.bukatender.screen.fragment.MyTenderFragment;
+import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
  * @author Muhammad Umar Farisi
@@ -26,23 +30,36 @@ public class MyTenderController{
 
     public MyTenderController(MyTenderFragment fragment) {
         this.fragment = fragment;
-        loadData();
+        tenderDA = new TenderDA();
     }
 
-    private void loadData(){
-        tenderDA = new TenderDA();
-        //TODO change userId
-        String userId = "123";
-        tenderDA.getUserTender(userId, new DACallback<List<Tender>>() {
+    public void loadData() {
+        fragment.getTenderRecyclerView().setVisibility(View.GONE);
+        fragment.getProgressBar().setVisibility(View.VISIBLE);
+        tenderDA.getUserTender(Authentication.getUserId(),new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
                 MyTenderController.this.tenders = tenders;
                 fragment.configureRecyclerView(tenders);
+                if(tenders.isEmpty()){
+                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                }else {
+                    fragment.getEmptyTextView().setVisibility(View.GONE);
+                    fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
+                }
+                fragment.getProgressBar().setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Toast.makeText(fragment.getContext(),message,Toast.LENGTH_SHORT).show();
+                if(tenders == null || tenders.isEmpty()){
+                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                }else {
+                    fragment.getEmptyTextView().setVisibility(View.GONE);
+                    fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
+                }
+                fragment.getProgressBar().setVisibility(View.GONE);
             }
         });
     }
@@ -54,4 +71,11 @@ public class MyTenderController{
         fragment.startActivity(intent);
     }
 
+    public void onClick(int id) {
+        switch (id){
+            case R.id.addFloatingActionButton:
+                fragment.startActivity(new Intent(fragment.getActivity(), SetTenderActivity.class));
+                break;
+        }
+    }
 }

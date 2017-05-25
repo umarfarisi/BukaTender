@@ -32,17 +32,22 @@
         android:gravity="top"
         android:id="@+id/shortDescriptionTextView"/>
 
-    <Button
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/validityPeriodButton"
-        android:text="VALIDITY PERIOD"/>
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="IMAGE RESOURCE"
-        android:id="@+id/imageResourceButton"/>
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/validityPeriodButton"
+            android:text="Periode"/>
+        <Button
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="IMAGE"
+            android:id="@+id/imageResourceButton"/>
+    </LinearLayout>
 
     <Button
         android:text="SAVE"

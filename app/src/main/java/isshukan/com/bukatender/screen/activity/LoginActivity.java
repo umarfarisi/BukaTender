@@ -45,6 +45,8 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         if(isControllerNotNull()){
             controller.login();
+            Authentication.setUserId("123");
+            startActivity(new Intent(this, MainActivity.class));
         }
     }
 

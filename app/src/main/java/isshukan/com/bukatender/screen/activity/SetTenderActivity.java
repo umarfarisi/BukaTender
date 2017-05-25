@@ -1,13 +1,18 @@
 package isshukan.com.bukatender.screen.activity;
 
+import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.TextView;
+
+import java.util.Calendar;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.screen.activity.controller.SetTenderController;
 
-public class SetTenderActivity extends BaseActivity implements View.OnClickListener{
+public class SetTenderActivity extends BaseActivity implements View.OnClickListener, DatePickerDialog.OnDateSetListener {
 
     private TextView titleTextView;
     private TextView startingPriceTextView;
@@ -15,6 +20,8 @@ public class SetTenderActivity extends BaseActivity implements View.OnClickListe
     private Button validityPeriodButton;
     private Button imageResourceButton;
     private Button actionButton;
+
+    private DatePickerDialog datePickerDialog;
 
     private SetTenderController controller;
 
@@ -37,6 +44,10 @@ public class SetTenderActivity extends BaseActivity implements View.OnClickListe
         controller = new SetTenderController(this);
     }
 
+    public void configureDatePickerDialog(Calendar calendar){
+        datePickerDialog = new DatePickerDialog(this, this, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+    }
+
     public TextView getTitleTextView() {
         return titleTextView;
     }
@@ -49,6 +60,14 @@ public class SetTenderActivity extends BaseActivity implements View.OnClickListe
         return shortDescriptionTextView;
     }
 
+    public Button getActionButton() {
+        return actionButton;
+    }
+
+    public DatePickerDialog getDatePickerDialog() {
+        return datePickerDialog;
+    }
+
     @Override
     public boolean isControllerNotNull() {
         return controller != null;
@@ -56,8 +75,23 @@ public class SetTenderActivity extends BaseActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        if(controller != null){
+        if(isControllerNotNull()){
             controller.onClick(v.getId());
+        }
+    }
+
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+        if(isControllerNotNull()){
+            controller.onValidityPeriodChange(year, month, dayOfMonth);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(isControllerNotNull()){
+            controller.onImageChange(requestCode, resultCode, data);
         }
     }
 }
