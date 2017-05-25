@@ -43,7 +43,9 @@ public class BidViewHolder extends RecyclerView.ViewHolder implements View.OnCli
     }
 
     public void setData(Bid bid , int position){
-        Picasso.with(itemView.getContext()).load(bid.getImageResource()).into(photoImageView);
+        if(bid.getImageResource() != null && !bid.getImageResource().isEmpty()){
+            Picasso.with(itemView.getContext()).load(bid.getImageResource()).into(photoImageView);
+        }
         titleTextView.setText(bid.getTitleProduct());
         priceTextView.setText(Formatter.priceFormatter(bid.getBidPrice()));
         shortDescriptionTextView.setText(bid.getShortDescription());
