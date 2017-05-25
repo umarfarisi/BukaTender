@@ -1,11 +1,15 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 
+import isshukan.com.bukatender.R;
+import isshukan.com.bukatender.screen.activity.LoginActivity;
 import isshukan.com.bukatender.screen.activity.MainActivity;
 import isshukan.com.bukatender.screen.fragment.MyBidFragment;
 import isshukan.com.bukatender.screen.fragment.MyTenderFragment;
 import isshukan.com.bukatender.screen.fragment.TenderFragment;
+import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
  * @author Muhammad Umar Farisi
@@ -40,5 +44,14 @@ public class MainController {
 
         activity.setUpTabAndViewPager(titels, fragments);
 
+    }
+
+    public void onOptionItemSelected(int itemId) {
+        if(itemId == R.id.logoutMenu){
+            Authentication.removeUserId();
+            Authentication.removeUserToken();
+            activity.startActivity(new Intent(activity, LoginActivity.class));
+            activity.finish();
+        }
     }
 }

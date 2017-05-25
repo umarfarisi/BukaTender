@@ -3,6 +3,8 @@ package isshukan.com.bukatender.screen.activity;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.screen.activity.controller.MainController;
@@ -24,6 +26,20 @@ public class MainActivity extends BaseActivity{
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(isControllerNotNull()){
+            controller.onOptionItemSelected(item.getItemId());
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void setDefaultSetting() {
         controller = new MainController(this);
     }
@@ -36,6 +52,6 @@ public class MainActivity extends BaseActivity{
 
     @Override
     public boolean isControllerNotNull() {
-        return false;
+        return controller != null;
     }
 }
