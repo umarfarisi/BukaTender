@@ -4,7 +4,9 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/margin_standard">
+    app:cardElevation="@dimen/margin_standard"
+    app:contentPadding="@dimen/margin_standard"
+    android:layout_margin="@dimen/margin_standard">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,28 +17,42 @@
             android:layout_height="100dp"
             android:id="@+id/photoImageView"/>
         <RelativeLayout
+            android:layout_marginLeft="@dimen/margin_standard"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="100dp">
             <TextView
+                android:textStyle="bold"
+                android:textAppearance="?android:textAppearanceLarge"
                 android:text="Galaxi 7"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:id="@+id/titleTextView"/>
             <TextView
+                android:textAppearance="?android:textAppearanceSmall"
                 android:text="16 Agustus 2017"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/titleTextView"
                 android:id="@+id/validityPeriodTextView"/>
             <TextView
+                android:layout_alignTop="@+id/validityPeriodTextView"
+                android:layout_toRightOf="@+id/validityPeriodTextView"
+                android:textStyle="bold"
+                android:textColor="@color/colorPrimary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=" (expired)"/>
+            <TextView
+                android:textAppearance="?android:textAppearanceSmall"
                 android:text="HP, Elektronik, HandPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/tagTextView"
                 android:layout_above="@+id/startingPriceTextView"/>
             <TextView
+                android:textAppearance="?android:textAppearanceMedium"
                 android:text="Rp 10.000.000"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
