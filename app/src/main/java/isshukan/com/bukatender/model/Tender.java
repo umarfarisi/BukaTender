@@ -18,6 +18,17 @@ public class Tender implements Serializable{
     private String shortDescription;
     private List<String> tag;
 
+    public Tender(int tenderId, String userId, String title, long validityPeriod, double startingPrice, String imageResource, String shortDescription, List<String> tag) {
+        this.tenderId = tenderId;
+        this.userId = userId;
+        this.title = title;
+        this.validityPeriod = validityPeriod;
+        this.startingPrice = startingPrice;
+        this.imageResource = imageResource;
+        this.shortDescription = shortDescription;
+        this.tag = tag;
+    }
+
     public Tender(int tenderId, String userId, String title, long validityPeriod, double startingPrice, String imageResource) {
         this.tenderId = tenderId;
         this.userId = userId;
