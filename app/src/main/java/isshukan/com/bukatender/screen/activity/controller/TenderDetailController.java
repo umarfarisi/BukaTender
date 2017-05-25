@@ -3,6 +3,7 @@ package isshukan.com.bukatender.screen.activity.controller;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -10,6 +11,8 @@ import java.util.Date;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
+import isshukan.com.bukatender.dataaccess.api.TenderDA;
+import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.ListBidActivity;
 import isshukan.com.bukatender.screen.activity.SetTenderActivity;
@@ -27,9 +30,11 @@ public class TenderDetailController {
     private TenderDetailActivity activity;
 
     private Tender tender;
+    private TenderDA tenderDA;
 
     public TenderDetailController(TenderDetailActivity activity) {
         this.activity = activity;
+        tenderDA = new TenderDA();
         handleIntent();
         loadData();
         setDefaultSetting();
@@ -89,6 +94,26 @@ public class TenderDetailController {
                 this.tender = (Tender) data.getSerializableExtra(Constant.TENDER);
                 loadData();
             }
+        }
+    }
+
+    public void onOptionItemSelected(int itemId) {
+        if(itemId == R.id.deleteMenu){
+            tenderDA.deleteTender(tender, new DACallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean isSuccess) {
+                    if(isSuccess){
+                        activity.finish();
+                    }else{
+                        Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 }

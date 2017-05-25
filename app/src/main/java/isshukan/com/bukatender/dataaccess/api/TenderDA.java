@@ -146,7 +146,7 @@ public class TenderDA {
         }, params);
     }
 
-    public void deleteTender(Tender tender){
+    public void deleteTender(Tender tender, final DACallback<Boolean> callback){
         Map<String,String> params = new HashMap<>();
         params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_DELETE);
         params.put(ConstantAPI.TENDER_ID, String.valueOf(tender.getTenderId()));
@@ -154,12 +154,18 @@ public class TenderDA {
         APIHelper.post(url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                //TODO
+                try {
+                    JSONObject responseJO = new JSONObject(response);
+                    String status = responseJO.getString(ConstantAPI.STATUS);
+                    callback.onSuccess(status.equals(ConstantAPI.STATUS_SUCCESS));
+                } catch (JSONException e) {
+                    callback.onFailure("ERROR: "+e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                //TODO
+                callback.onFailure("ERROR: "+error.getMessage());
             }
         }, params);
     }
