@@ -8,6 +8,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -25,6 +27,8 @@ public class MyTenderFragment extends BaseFragment{
 
     private RecyclerView tenderRecyclerView;
     private View view;
+    private ProgressBar progressBar;
+    private TextView emptyTextView;
 
     private TenderAdapter adapter;
 
@@ -53,8 +57,26 @@ public class MyTenderFragment extends BaseFragment{
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        if(isControllerNotNull()){
+            controller.loadData();
+        }
+    }
+
+    @Override
     public void loadViews() {
         tenderRecyclerView = (RecyclerView) view.findViewById(R.id.tenderRecyclerView);
+        progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
+        emptyTextView = (TextView) view.findViewById(R.id.emptyTextView);
+    }
+
+    public TextView getEmptyTextView() {
+        return emptyTextView;
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
     }
 
     @Override

@@ -1,6 +1,7 @@
 package isshukan.com.bukatender.screen.fragment.controller;
 
 import android.content.Intent;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
@@ -27,21 +28,33 @@ public class MyTenderController{
 
     public MyTenderController(MyTenderFragment fragment) {
         this.fragment = fragment;
-        loadData();
+        tenderDA = new TenderDA();
     }
 
-    private void loadData(){
-        tenderDA = new TenderDA();
-        tenderDA.getUserTender(Authentication.getUserId(), new DACallback<List<Tender>>() {
+    public void loadData() {
+        fragment.getProgressBar().setVisibility(View.VISIBLE);
+        tenderDA.getAllTender(new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
                 MyTenderController.this.tenders = tenders;
                 fragment.configureRecyclerView(tenders);
+                if(tenders.isEmpty()){
+                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                }else {
+                    fragment.getEmptyTextView().setVisibility(View.GONE);
+                }
+                fragment.getProgressBar().setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
                 Toast.makeText(fragment.getContext(),message,Toast.LENGTH_SHORT).show();
+                if(tenders == null || tenders.isEmpty()){
+                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                }else {
+                    fragment.getEmptyTextView().setVisibility(View.GONE);
+                }
+                fragment.getProgressBar().setVisibility(View.GONE);
             }
         });
     }
