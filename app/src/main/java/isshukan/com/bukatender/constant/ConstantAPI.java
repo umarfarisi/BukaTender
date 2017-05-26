@@ -9,6 +9,7 @@ public class ConstantAPI {
     public static final String TENDER_END_POINT = "/tender.php";
     public static final String TAG_END_POINT = "/tag.php";
     public static final String BID_END_POINT = "/bid.php";
+    public static final String SLASH = "/";
 
     public static final String METHOD = "method";
     public static final String METHOD_CREATE = "create";
