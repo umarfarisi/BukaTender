@@ -3,7 +3,6 @@ package isshukan.com.bukatender.screen.fragment.controller;
 import android.view.View;
 import android.widget.Toast;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import isshukan.com.bukatender.dataaccess.api.BidDA;
@@ -35,29 +34,37 @@ public class MyBidController{
         bidDA.getUserBid(Authentication.getUserId(), new DACallback<List<Bid>>() {
             @Override
             public void onSuccess(List<Bid> bids) {
-                MyBidController.this.bids = bids;
-                fragment.configureRecyclerView(bids);
-                if(bids.isEmpty()){
-                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
-                }else{
-                    fragment.getEmptyTextView().setVisibility(View.GONE);
-                    fragment.getBidRecyclerView().setVisibility(View.VISIBLE);
+                if(isFragmentNotNull()) {
+                    MyBidController.this.bids = bids;
+                    fragment.configureRecyclerView(bids);
+                    if (bids.isEmpty()) {
+                        fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                    } else {
+                        fragment.getEmptyTextView().setVisibility(View.GONE);
+                        fragment.getBidRecyclerView().setVisibility(View.VISIBLE);
+                    }
+                    fragment.getProgressBar().setVisibility(View.GONE);
                 }
-                fragment.getProgressBar().setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
-                Toast.makeText(fragment.getContext(), message, Toast.LENGTH_LONG).show();
-                if(bids == null || bids.isEmpty()){
-                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
-                }else{
-                    fragment.getEmptyTextView().setVisibility(View.GONE);
-                    fragment.getBidRecyclerView().setVisibility(View.VISIBLE);
+                if(isFragmentNotNull()) {
+                    Toast.makeText(fragment.getContext(), message, Toast.LENGTH_LONG).show();
+                    if (bids == null || bids.isEmpty()) {
+                        fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                    } else {
+                        fragment.getEmptyTextView().setVisibility(View.GONE);
+                        fragment.getBidRecyclerView().setVisibility(View.VISIBLE);
+                    }
+                    fragment.getProgressBar().setVisibility(View.GONE);
                 }
-                fragment.getProgressBar().setVisibility(View.GONE);
             }
         });
+    }
+
+    private boolean isFragmentNotNull(){
+        return fragment != null;
     }
 
 }

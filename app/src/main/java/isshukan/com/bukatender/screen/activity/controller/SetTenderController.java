@@ -85,35 +85,43 @@ public class SetTenderController {
                     tenderDA.updateTender(oldTender, newTender, new DACallback<Boolean>() {
                         @Override
                         public void onSuccess(Boolean isSuccess) {
-                            if(isSuccess){
-                                Intent intentResult = new Intent();
-                                intentResult.putExtra(Constant.TENDER, newTender);
-                                activity.setResult(Activity.RESULT_OK, intentResult);
-                                activity.finish();
-                            }else{
-                                Toast.makeText(activity, "Failed to save data", Toast.LENGTH_LONG).show();
+                            if(isActivityNotNull()) {
+                                if (isSuccess) {
+                                    Intent intentResult = new Intent();
+                                    intentResult.putExtra(Constant.TENDER, newTender);
+                                    activity.setResult(Activity.RESULT_OK, intentResult);
+                                    activity.finish();
+                                } else {
+                                    Toast.makeText(activity, "Failed to save data", Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
 
                         @Override
                         public void onFailure(String message) {
-                            Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                            if(isActivityNotNull()){
+                                Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
                 }else{
                     tenderDA.createTender(newTender, new DACallback<Boolean>() {
                         @Override
                         public void onSuccess(Boolean isSuccess) {
-                            if(isSuccess){
-                                activity.finish();
-                            }else{
-                                Toast.makeText(activity, "Failed to save data", Toast.LENGTH_LONG).show();
+                            if(isActivityNotNull()) {
+                                if (isSuccess) {
+                                    activity.finish();
+                                } else {
+                                    Toast.makeText(activity, "Failed to save data", Toast.LENGTH_LONG).show();
+                                }
                             }
                         }
 
                         @Override
                         public void onFailure(String message) {
-                            Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                            if(isActivityNotNull()){
+                                Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
                 }
@@ -145,4 +153,9 @@ public class SetTenderController {
             }
         }
     }
+
+    private boolean isActivityNotNull(){
+        return activity != null;
+    }
+
 }

@@ -56,19 +56,23 @@ public class TenderDetailController {
             tenderDA.getSpecificTender(tender.getTenderId(), tender.getUserId(), new DACallback<Tender>() {
                 @Override
                 public void onSuccess(Tender tender) {
-                    activity.getSupportActionBar().setTitle(tender.getTitle());
-                    activity.getShortDescriptionTextView().setText(tender.getShortDescription());
-                    activity.getValidityPeriodTextView().setText("Expired date : " + Formatter.dateFormatter(tender.getValidityPeriod()));
-                    activity.getTagTextView().setText("Tag : " + tender.getTag().toString());
-                    activity.getStartingPriceTextView().setText("Starting price : " + Formatter.priceFormatter(tender.getStartingPrice()));
-                    if (tender.getImageResource() != null && !tender.getImageResource().isEmpty()) {
-                        Picasso.with(activity).load(ConstantAPI.BASE_URL+ConstantAPI.SLASH+tender.getImageResource()).into(activity.getPhotoImageView());
+                    if(isActivityNotNull()) {
+                        activity.getSupportActionBar().setTitle(tender.getTitle());
+                        activity.getShortDescriptionTextView().setText(tender.getShortDescription());
+                        activity.getValidityPeriodTextView().setText("Expired date : " + Formatter.dateFormatter(tender.getValidityPeriod()));
+                        activity.getTagTextView().setText("Tag : " + tender.getTag().toString());
+                        activity.getStartingPriceTextView().setText("Starting price : " + Formatter.priceFormatter(tender.getStartingPrice()));
+                        if (tender.getImageResource() != null && !tender.getImageResource().isEmpty()) {
+                            Picasso.with(activity).load(ConstantAPI.BASE_URL + ConstantAPI.SLASH + tender.getImageResource()).into(activity.getPhotoImageView());
+                        }
                     }
                 }
 
                 @Override
                 public void onFailure(String message) {
-                    Toast.makeText(activity, "ERROR: " + message, Toast.LENGTH_LONG).show();
+                    if(isActivityNotNull()){
+                        Toast.makeText(activity, "ERROR: " + message, Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
@@ -115,18 +119,27 @@ public class TenderDetailController {
             tenderDA.deleteTender(tender, new DACallback<Boolean>() {
                 @Override
                 public void onSuccess(Boolean isSuccess) {
-                    if(isSuccess){
-                        activity.finish();
-                    }else{
-                        Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                    if(isActivityNotNull()) {
+                        if (isSuccess) {
+                            activity.finish();
+                        } else {
+                            Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                        }
                     }
                 }
 
                 @Override
                 public void onFailure(String message) {
-                    Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                    if(isActivityNotNull()){
+                        Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                    }
                 }
             });
         }
     }
+
+    private boolean isActivityNotNull(){
+        return activity != null;
+    }
+
 }

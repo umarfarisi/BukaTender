@@ -42,14 +42,21 @@ public class ListBidController {
         bidDA.getTenderBid(tender.getTenderId(), new DACallback<List<Bid>>() {
             @Override
             public void onSuccess(List<Bid> bids) {
-                ListBidController.this.bids = bids;
-                activity.configureRecyclerView(bids);
+                if(isActivityNotNull()) {
+                    ListBidController.this.bids = bids;
+                    activity.configureRecyclerView(bids);
+                }
             }
 
             @Override
             public void onFailure(String message) {
-                Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
+                if(isActivityNotNull())Toast.makeText(activity, message, Toast.LENGTH_LONG).show();
             }
         });
     }
+
+    private boolean isActivityNotNull(){
+        return activity != null;
+    }
+
 }

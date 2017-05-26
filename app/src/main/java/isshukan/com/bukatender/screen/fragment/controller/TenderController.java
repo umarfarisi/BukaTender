@@ -34,27 +34,31 @@ public class TenderController{
         tenderDA.getAllTender(new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
-                TenderController.this.tenders = tenders;
-                fragment.configureRecyclerView(tenders);
-                if(tenders.isEmpty()){
-                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
-                }else {
-                    fragment.getEmptyTextView().setVisibility(View.GONE);
-                    fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
+                if(isFragmentNotNull()) {
+                    TenderController.this.tenders = tenders;
+                    fragment.configureRecyclerView(tenders);
+                    if (tenders.isEmpty()) {
+                        fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                    } else {
+                        fragment.getEmptyTextView().setVisibility(View.GONE);
+                        fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
+                    }
+                    fragment.getProgressBar().setVisibility(View.GONE);
                 }
-                fragment.getProgressBar().setVisibility(View.GONE);
             }
 
             @Override
             public void onFailure(String message) {
-                Toast.makeText(fragment.getContext(),message,Toast.LENGTH_SHORT).show();
-                if(tenders == null || tenders.isEmpty()){
-                    fragment.getEmptyTextView().setVisibility(View.VISIBLE);
-                }else {
-                    fragment.getEmptyTextView().setVisibility(View.GONE);
-                    fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
+                if(isFragmentNotNull()) {
+                    Toast.makeText(fragment.getContext(), message, Toast.LENGTH_SHORT).show();
+                    if (tenders == null || tenders.isEmpty()) {
+                        fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                    } else {
+                        fragment.getEmptyTextView().setVisibility(View.GONE);
+                        fragment.getTenderRecyclerView().setVisibility(View.VISIBLE);
+                    }
+                    fragment.getProgressBar().setVisibility(View.GONE);
                 }
-                fragment.getProgressBar().setVisibility(View.GONE);
             }
         });
     }
@@ -65,4 +69,9 @@ public class TenderController{
         intent.putExtra(Constant.TENDER, tender);
         fragment.startActivity(intent);
     }
+
+    private boolean isFragmentNotNull(){
+        return fragment != null;
+    }
+
 }
