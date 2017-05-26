@@ -11,6 +11,7 @@ import java.util.Date;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
+import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.api.TenderDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
@@ -51,13 +52,25 @@ public class TenderDetailController {
     }
 
     private void loadData() {
-        activity.getSupportActionBar().setTitle(tender.getTitle());
-        activity.getShortDescriptionTextView().setText(tender.getShortDescription());
-        activity.getValidityPeriodTextView().setText("Expired date : "+Formatter.dateFormatter(tender.getValidityPeriod()));
-        activity.getTagTextView().setText("Tag : "+tender.getTag().toString());
-        activity.getStartingPriceTextView().setText("Starting price : "+Formatter.priceFormatter(tender.getStartingPrice()));
-        if(tender.getImageResource() != null && !tender.getImageResource().isEmpty()){
-            Picasso.with(activity).load(tender.getImageResource()).into(activity.getPhotoImageView());
+        if(tender != null && tender.getUserId() != null && tender.getTenderId() != -1) {
+            tenderDA.getSpecificTender(tender.getTenderId(), tender.getUserId(), new DACallback<Tender>() {
+                @Override
+                public void onSuccess(Tender tender) {
+                    activity.getSupportActionBar().setTitle(tender.getTitle());
+                    activity.getShortDescriptionTextView().setText(tender.getShortDescription());
+                    activity.getValidityPeriodTextView().setText("Expired date : " + Formatter.dateFormatter(tender.getValidityPeriod()));
+                    activity.getTagTextView().setText("Tag : " + tender.getTag().toString());
+                    activity.getStartingPriceTextView().setText("Starting price : " + Formatter.priceFormatter(tender.getStartingPrice()));
+                    if (tender.getImageResource() != null && !tender.getImageResource().isEmpty()) {
+                        Picasso.with(activity).load(ConstantAPI.BASE_URL+ConstantAPI.SLASH+tender.getImageResource()).into(activity.getPhotoImageView());
+                    }
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    Toast.makeText(activity, "ERROR: " + message, Toast.LENGTH_LONG).show();
+                }
+            });
         }
     }
 

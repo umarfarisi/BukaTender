@@ -11,6 +11,7 @@ import java.util.Date;
 
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
+import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.support.adapter.viewholder.listener.TenderListener;
 import isshukan.com.bukatender.support.utils.Formatter;
@@ -49,7 +50,7 @@ public class TenderViewHolder extends RecyclerView.ViewHolder implements View.On
 
     public void setData(Tender tender, int position){
         if(tender.getImageResource() != null && !tender.getImageResource().isEmpty()){
-            Picasso.with(itemView.getContext()).load(tender.getImageResource()).into(photoImageView);
+            Picasso.with(itemView.getContext()).load(ConstantAPI.BASE_URL+ConstantAPI.SLASH+tender.getImageResource()).into(photoImageView);
         }
         titleTextView.setText(tender.getTitle());
         validityPeriodTextView.setText(Formatter.dateFormatter(tender.getValidityPeriod()));

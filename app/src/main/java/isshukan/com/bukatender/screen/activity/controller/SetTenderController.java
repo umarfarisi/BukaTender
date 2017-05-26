@@ -1,7 +1,6 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
 import android.app.Activity;
-import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -20,6 +19,7 @@ import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.SetTenderActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
+import isshukan.com.bukatender.support.utils.Converter;
 
 /**
  * @author Muhammad Umar Farisi
@@ -136,8 +136,9 @@ public class SetTenderController {
             if(resultCode == Activity.RESULT_OK && data != null){
                 Uri uri = data.getData();
                 try {
-                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
-                    //TODO
+                    Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(activity.getContentResolver(), uri);
+                    String imageString = Converter.convertBitmapToString(imageBitmap);
+                    newTender.setImageResource(imageString);
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
