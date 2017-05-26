@@ -32,7 +32,7 @@ public class APIHelper {
                 return params;
             }
             @Override
-            public Map<String, String> getHeaders() {
+            public Map<String, String> getHeaders() throws AuthFailureError {
                 return header;
             }
         };
@@ -41,6 +41,16 @@ public class APIHelper {
 
     public static void get(String url ,Response.Listener<String> listener, Response.ErrorListener errorListener){
         StringRequest request = new StringRequest(Request.Method.GET, url, listener, errorListener);
+        Volley.newRequestQueue(GlobalVariable.APP_CONTEXT).add(request);
+    }
+
+    public static void get(String url ,Response.Listener<String> listener, Response.ErrorListener errorListener, final Map<String, String> header){
+        StringRequest request = new StringRequest(Request.Method.GET, url, listener, errorListener) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return header;
+            }
+        };
         Volley.newRequestQueue(GlobalVariable.APP_CONTEXT).add(request);
     }
 }
