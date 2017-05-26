@@ -62,6 +62,7 @@ public class LoginController {
                             //intent.setClass(activity, MainActivity.class);
                             intent.setClass(activity, ListMylapakActivity.class);
                             activity.startActivity(intent);
+                            activity.finish();
                         } else {
                             Toast.makeText(activity, "Invalid Username or Password", Toast.LENGTH_SHORT).show();
                         }
