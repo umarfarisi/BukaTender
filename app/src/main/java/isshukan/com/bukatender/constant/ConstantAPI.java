@@ -5,6 +5,9 @@ package isshukan.com.bukatender.constant;
  * @created 22/05/2017
  */
 public class ConstantAPI {
+
+    public static final String BUKALAPAK_USER_AUTH_ENDPOINT = "https://api.bukalapak.com/v2/authenticate.json";
+
     public static final String BASE_URL = "http://10.0.2.2/buka_tender";
     public static final String TENDER_END_POINT = "/tender.php";
     public static final String TAG_END_POINT = "/tag.php";

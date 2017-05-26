@@ -7,6 +7,9 @@ import com.android.volley.VolleyError;
 import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
+
+import isshukan.com.bukatender.constant.Constant;
+import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.api.APIHelper;
 import android.content.Intent;
 
@@ -22,10 +25,13 @@ import isshukan.com.bukatender.support.utils.Authentication;
 public class LoginController {
 
     private LoginActivity activity;
-    private String USER_AUTH_ENDPOINT = "https://api.bukalapak.com/v2/authenticate.json";
 
     public LoginController(LoginActivity activity) {
         this.activity = activity;
+        if(Authentication.getUserId() != null && Authentication.getUserToken() != null){
+            activity.startActivity(new Intent(activity, MainActivity.class));
+            activity.finish();
+        }
     }
 
     public void login() {
@@ -42,7 +48,7 @@ public class LoginController {
             String auth = "Basic " + Base64.encodeToString(credentials.getBytes(), Base64.NO_WRAP);
             header.put("Authorization", auth);
 
-            APIHelper.post(USER_AUTH_ENDPOINT, new Response.Listener<String>() {
+            APIHelper.post(ConstantAPI.BUKALAPAK_USER_AUTH_ENDPOINT, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
                     try {
