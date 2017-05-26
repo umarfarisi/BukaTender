@@ -44,9 +44,9 @@ public class ListMylapakActivity extends BaseActivity {
         return controller != null;
     }
 
-    public void configureRecyclerView(List<Mylapak> bids){
-        adapter = new MylapakAdapter(bids, this, listener);
-        mylapakRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
+    public void configureRecyclerView(List<Mylapak> mylapaks){
+        adapter = new MylapakAdapter(mylapaks, this, listener);
+        mylapakRecyclerView.setLayoutManager(new GridLayoutManager(this, 1));
         mylapakRecyclerView.setAdapter(adapter);
     }
 

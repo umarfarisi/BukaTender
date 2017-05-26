@@ -21,6 +21,7 @@
         <activity android:name=".screen.activity.MainActivity" />
         <activity android:name=".screen.activity.ListBidActivity" />
         <activity android:name=".screen.activity.ListProductsActivity" />
+        <activity android:name=".screen.activity.ListMylapakActivity" />
         <activity android:name=".screen.activity.TenderDetailActivity" />
         <activity android:name=".screen.activity.SetTenderActivity" />
     </application>
