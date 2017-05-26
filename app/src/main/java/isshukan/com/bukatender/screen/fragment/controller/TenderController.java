@@ -34,7 +34,7 @@ public class TenderController{
         tenderDA.getAllTender(new DACallback<List<Tender>>() {
             @Override
             public void onSuccess(List<Tender> tenders) {
-                if(isFragmentNotNull()) {
+                if(isFragmentAndContextNotNull()) {
                     TenderController.this.tenders = tenders;
                     fragment.configureRecyclerView(tenders);
                     if (tenders.isEmpty()) {
@@ -49,7 +49,7 @@ public class TenderController{
 
             @Override
             public void onFailure(String message) {
-                if(isFragmentNotNull()) {
+                if(isFragmentAndContextNotNull()) {
                     Toast.makeText(fragment.getContext(), message, Toast.LENGTH_SHORT).show();
                     if (tenders == null || tenders.isEmpty()) {
                         fragment.getEmptyTextView().setVisibility(View.VISIBLE);
@@ -70,8 +70,8 @@ public class TenderController{
         fragment.startActivity(intent);
     }
 
-    private boolean isFragmentNotNull(){
-        return fragment != null;
+    private boolean isFragmentAndContextNotNull(){
+        return fragment != null  && fragment.getContext() != null;
     }
 
 }

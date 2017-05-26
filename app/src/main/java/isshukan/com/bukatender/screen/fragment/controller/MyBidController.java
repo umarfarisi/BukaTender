@@ -34,7 +34,7 @@ public class MyBidController{
         bidDA.getUserBid(Authentication.getUserId(), new DACallback<List<Bid>>() {
             @Override
             public void onSuccess(List<Bid> bids) {
-                if(isFragmentNotNull()) {
+                if(isFragmentAndContextNotNull()) {
                     MyBidController.this.bids = bids;
                     fragment.configureRecyclerView(bids);
                     if (bids.isEmpty()) {
@@ -49,7 +49,7 @@ public class MyBidController{
 
             @Override
             public void onFailure(String message) {
-                if(isFragmentNotNull()) {
+                if(isFragmentAndContextNotNull()) {
                     Toast.makeText(fragment.getContext(), message, Toast.LENGTH_LONG).show();
                     if (bids == null || bids.isEmpty()) {
                         fragment.getEmptyTextView().setVisibility(View.VISIBLE);
@@ -63,8 +63,8 @@ public class MyBidController{
         });
     }
 
-    private boolean isFragmentNotNull(){
-        return fragment != null;
+    private boolean isFragmentAndContextNotNull(){
+        return fragment != null && fragment.getContext() != null;
     }
 
 }
