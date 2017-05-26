@@ -14,8 +14,14 @@ public class Mylapak implements Serializable {
     private String description;
     private String imageSmallURL;
     private String imageURL;
+    private String condition;
+    private int stock;
+    private double avg_rate;
+    private int user_count_rate;
+    private int view_count;
+    private int interest_count;
 
-    public Mylapak(String mylapakId, String title, Double price, String category, String description, String imageSmallURL, String imageURL) {
+    public Mylapak(String mylapakId, String title, Double price, String category, String description, String imageSmallURL, String imageURL, String condition, int stock, double avg_rate, int user_count_rate, int view_count, int interest_count) {
         this.mylapakId = mylapakId;
         this.title = title;
         this.price = price;
@@ -23,6 +29,12 @@ public class Mylapak implements Serializable {
         this.description = description;
         this.imageSmallURL = imageSmallURL;
         this.imageURL = imageURL;
+        this.condition = condition;
+        this.stock = stock;
+        this.avg_rate = avg_rate;
+        this.user_count_rate = user_count_rate;
+        this.view_count = view_count;
+        this.interest_count = interest_count;
     }
 
     public String getMylapakId() {
@@ -81,6 +93,54 @@ public class Mylapak implements Serializable {
         this.imageURL = imageURL;
     }
 
+    public String getCondition() {
+        return condition;
+    }
+
+    public void setCondition(String condition) {
+        this.condition = condition;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
+
+    public double getAvg_rate() {
+        return avg_rate;
+    }
+
+    public void setAvg_rate(double avg_rate) {
+        this.avg_rate = avg_rate;
+    }
+
+    public int getUser_count_rate() {
+        return user_count_rate;
+    }
+
+    public void setUser_count_rate(int user_count_rate) {
+        this.user_count_rate = user_count_rate;
+    }
+
+    public int getView_count() {
+        return view_count;
+    }
+
+    public void setView_count(int view_count) {
+        this.view_count = view_count;
+    }
+
+    public int getInterest_count() {
+        return interest_count;
+    }
+
+    public void setInterest_count(int interest_count) {
+        this.interest_count = interest_count;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -107,6 +167,12 @@ public class Mylapak implements Serializable {
                 ", description='" + description + '\'' +
                 ", imageSmallURL='" + imageSmallURL + '\'' +
                 ", imageURL='" + imageURL + '\'' +
+                ", condition='" + condition + '\'' +
+                ", stock=" + stock +
+                ", avg_rate=" + avg_rate +
+                ", user_count_rate=" + user_count_rate +
+                ", view_count=" + view_count +
+                ", interest_count=" + interest_count +
                 '}';
     }
 }

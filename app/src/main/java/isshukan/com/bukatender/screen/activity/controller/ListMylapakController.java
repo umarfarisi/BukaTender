@@ -25,8 +25,8 @@ public class ListMylapakController {
 
     private ListMylapakActivity activity;
     private List<Mylapak> mylapaks;
-    private String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json";
-    //private String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json?not_for_sale_only=1"; //testing purpose
+    //private String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json";
+    private String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json?not_for_sale_only=1"; //testing purpose
 
     public ListMylapakController(ListMylapakActivity activity) {
         this.activity = activity;
@@ -59,6 +59,12 @@ public class ListMylapakController {
                         String description;
                         String imageSmallURL;
                         String imageURL;
+                        String condition;
+                        int stock;
+                        double avg_rate;
+                        int user_count_rate;
+                        int view_count;
+                        int interest_count;
 
                         for(int i = 0; i < mylapakArr.length(); i++) {
                             mylapak = mylapakArr.getJSONObject(i);
@@ -69,8 +75,15 @@ public class ListMylapakController {
                             description = mylapak.getString("desc");
                             imageSmallURL = mylapak.getJSONArray("small_images").getString(0);
                             imageURL = mylapak.getJSONArray("images").getString(0);
+                            condition = mylapak.getString("condition");
+                            stock = mylapak.optInt("stock");
+                            avg_rate = mylapak.getJSONObject("rating").getDouble("average_rate");
+                            user_count_rate = mylapak.getJSONObject("rating").getInt("user_count");
+                            view_count = mylapak.getInt("view_count");
+                            interest_count = mylapak.getInt("interest_count");
 
-                            mylapaksTMP.add(new Mylapak(mylapakId, title, price, category, description, imageSmallURL, imageURL));
+                            mylapaksTMP.add(new Mylapak(mylapakId, title, price, category, description, imageSmallURL, imageURL,
+                                    condition, stock, avg_rate, user_count_rate, view_count, interest_count));
                         }
 
                         ListMylapakController.this.mylapaks = mylapaksTMP;

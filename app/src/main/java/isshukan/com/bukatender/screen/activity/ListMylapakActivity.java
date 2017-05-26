@@ -4,6 +4,7 @@ package isshukan.com.bukatender.screen.activity;
  * Created by - on 25/05/2017.
  */
 
+import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import java.util.List;
@@ -21,8 +22,11 @@ public class ListMylapakActivity extends BaseActivity {
 
     private MylapakListener listener = new MylapakListener() {
         @Override
-        public void onMylapakChoose(int position) {
-            //TODO
+        public void onMylapakChoose(int position, Mylapak mylapak) {
+            Intent intent = new Intent();
+            intent.setClass(getApplicationContext(), MylapakActivity.class);
+            intent.putExtra("mylapak-object", mylapak);
+            startActivity(intent);
         }
     };
 

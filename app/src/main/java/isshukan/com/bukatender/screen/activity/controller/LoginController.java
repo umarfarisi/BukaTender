@@ -9,6 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 import isshukan.com.bukatender.dataaccess.api.APIHelper;
 import android.content.Intent;
+
+import isshukan.com.bukatender.screen.activity.ListMylapakActivity;
 import isshukan.com.bukatender.screen.activity.LoginActivity;
 import isshukan.com.bukatender.screen.activity.MainActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
@@ -51,7 +53,8 @@ public class LoginController {
                             Toast.makeText(activity, "Login as " + jsonObject.getString("user_name"), Toast.LENGTH_SHORT).show();
 
                             Intent intent = new Intent();
-                            intent.setClass(activity, MainActivity.class);
+                            //intent.setClass(activity, MainActivity.class);
+                            intent.setClass(activity, ListMylapakActivity.class);
                             activity.startActivity(intent);
                         } else {
                             Toast.makeText(activity, "Invalid Username or Password", Toast.LENGTH_SHORT).show();

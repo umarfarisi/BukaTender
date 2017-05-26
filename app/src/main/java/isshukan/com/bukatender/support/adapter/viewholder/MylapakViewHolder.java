@@ -20,6 +20,7 @@ public class MylapakViewHolder extends RecyclerView.ViewHolder implements View.O
     private TextView mylapakPriceTextView;
     private TextView mylapakDescriptionTextView;
 
+    private Mylapak mylapak;
     private MylapakListener listener;
 
     private int position;
@@ -47,12 +48,13 @@ public class MylapakViewHolder extends RecyclerView.ViewHolder implements View.O
         mylapakPriceTextView.setText(Formatter.priceFormatter(mylapak.getPrice()));
         mylapakDescriptionTextView.setText(mylapak.getDescription());
         this.position = position;
+        this.mylapak = mylapak;
     }
 
     @Override
     public void onClick(View v) {
         if(position != -1){
-            listener.onMylapakChoose(position);
+            listener.onMylapakChoose(position, mylapak);
         }
     }
 }
