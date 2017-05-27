@@ -16,7 +16,7 @@ import isshukan.com.bukatender.support.utils.Formatter;
  * @author Muhammad Umar Farisi
  * @created 24/05/2017
  */
-public class BidViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
+public class BidViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener{
 
     private ImageView photoImageView;
     private TextView titleTextView;
@@ -32,6 +32,7 @@ public class BidViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         this.listener = listener;
         this.position = -1;
         itemView.setOnClickListener(this);
+        itemView.setOnLongClickListener(this);
         loadViews();
     }
 
@@ -57,5 +58,13 @@ public class BidViewHolder extends RecyclerView.ViewHolder implements View.OnCli
         if(position != -1){
             listener.onBidChoose(position);
         }
+    }
+
+    @Override
+    public boolean onLongClick(View v) {
+        if(position != -1){
+            listener.onBidChooseForLongTime(position);
+        }
+        return true;
     }
 }

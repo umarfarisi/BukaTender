@@ -1,6 +1,7 @@
 package isshukan.com.bukatender.screen.fragment;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -8,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -23,12 +26,15 @@ import isshukan.com.bukatender.support.adapter.viewholder.listener.BidListener;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class MyBidFragment extends BaseFragment{
+public class MyBidFragment extends BaseFragment implements View.OnClickListener {
 
     private View view;
     private RecyclerView bidRecyclerView;
     private ProgressBar progressBar;
     private TextView emptyTextView;
+
+    private Dialog dialog;
+    private Button deleteButton;
 
     private BidAdapter adapter;
 
@@ -39,6 +45,13 @@ public class MyBidFragment extends BaseFragment{
         public void onBidChoose(int position) {
             if(isControllerNotNull()){
                 //TODO
+            }
+        }
+
+        @Override
+        public void onBidChooseForLongTime(int position) {
+            if(isControllerNotNull()){
+                controller.onBidChooseForLongTime(position);
             }
         }
     };
@@ -64,11 +77,16 @@ public class MyBidFragment extends BaseFragment{
         bidRecyclerView = (RecyclerView) view.findViewById(R.id.bidRecyclerView);
         progressBar = (ProgressBar) view.findViewById(R.id.progressBar);
         emptyTextView = (TextView) view.findViewById(R.id.emptyTextView);
+        dialog = new Dialog(getContext());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.bid_context_dialog);
+        deleteButton = (Button) dialog.findViewById(R.id.deleteButton);
     }
 
     @Override
     public void setDefaultSetting() {
         controller = new MyBidController(this);
+        deleteButton.setOnClickListener(this);
     }
 
     public ProgressBar getProgressBar() {
@@ -96,5 +114,16 @@ public class MyBidFragment extends BaseFragment{
     @Override
     public boolean isControllerNotNull() {
         return bidRecyclerView != null;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(isControllerNotNull()){
+            controller.onClick(v.getId());
+        }
+    }
+
+    public Dialog getDialog() {
+        return dialog;
     }
 }

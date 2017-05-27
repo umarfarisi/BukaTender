@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.dataaccess.api.BidDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
@@ -22,6 +23,7 @@ public class MyBidController{
     private BidDA bidDA;
 
     private List<Bid> bids;
+    private Bid deletedBid;
 
     public MyBidController(MyBidFragment fragment) {
         this.fragment = fragment;
@@ -67,4 +69,38 @@ public class MyBidController{
         return fragment != null && fragment.getContext() != null;
     }
 
+    public void onBidChooseForLongTime(int position) {
+        deletedBid = bids.get(position);
+        fragment.getDialog().show();
+    }
+
+    public void onClick(int id) {
+        if(id == R.id.deleteButton && deletedBid != null){
+            bidDA.deleteBid(deletedBid, new DACallback<Boolean>() {
+                @Override
+                public void onSuccess(Boolean isSuccess) {
+                    if(isFragmentAndContextNotNull()){
+                        if(isSuccess){
+                            bids.remove(deletedBid);
+                            fragment.getAdapter().notifyDataSetChanged();
+                            if(bids.isEmpty()){
+                                fragment.getEmptyTextView().setVisibility(View.VISIBLE);
+                            }
+                        }else{
+                            Toast.makeText(fragment.getContext(),"ERROR: failed to delete bid",Toast.LENGTH_SHORT).show();
+                        }
+                        fragment.getDialog().dismiss();
+                    }
+                }
+
+                @Override
+                public void onFailure(String message) {
+                    if(isFragmentAndContextNotNull()){
+                        Toast.makeText(fragment.getContext(),message,Toast.LENGTH_SHORT).show();
+                        fragment.getDialog().dismiss();
+                    }
+                }
+            });
+        }
+    }
 }
