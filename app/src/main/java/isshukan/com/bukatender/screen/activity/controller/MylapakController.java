@@ -1,10 +1,13 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
+import isshukan.com.bukatender.R;
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.model.Mylapak;
 import isshukan.com.bukatender.screen.activity.MylapakActivity;
 import isshukan.com.bukatender.support.utils.Formatter;
@@ -14,12 +17,20 @@ import isshukan.com.bukatender.support.utils.Formatter;
  */
 
 public class MylapakController {
+
     private MylapakActivity activity;
     private Mylapak mylapak;
+
+    private boolean isPurposeForAddBid;
 
     public MylapakController(MylapakActivity activity) {
         this.activity = activity;
         handleIntent();
+        if(isPurposeForAddBid){
+            activity.getActionButton().setText("ADD TO BID");
+        }else{
+            activity.getActionButton().setText("BUY PRODUCT");
+        }
     }
 
     public void fetchData() {
@@ -41,6 +52,20 @@ public class MylapakController {
 
     public void handleIntent() {
         Intent intent = activity.getIntent();
-        this.mylapak = (Mylapak) intent.getSerializableExtra("mylapak-object");
+        this.mylapak = (Mylapak) intent.getSerializableExtra(Constant.PRODUCT);
+        isPurposeForAddBid = intent.getStringExtra(Constant.PURPOSE).equals(Constant.PURPOSE_ADD_BID);
+    }
+
+    public void onClick(int id) {
+        if(id == R.id.actionButton){
+            if(isPurposeForAddBid){
+                Intent data = new Intent();
+                data.putExtra(Constant.PRODUCT, mylapak);
+                activity.setResult(Activity.RESULT_OK,data);
+                activity.finish();
+            }else{
+                //TODO
+            }
+        }
     }
 }

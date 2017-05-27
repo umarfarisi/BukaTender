@@ -9,6 +9,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import java.util.List;
 import isshukan.com.bukatender.R;
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.model.Mylapak;
 import isshukan.com.bukatender.screen.activity.controller.ListMylapakController;
 import isshukan.com.bukatender.support.adapter.MylapakAdapter;
@@ -22,11 +23,10 @@ public class ListMylapakActivity extends BaseActivity {
 
     private MylapakListener listener = new MylapakListener() {
         @Override
-        public void onMylapakChoose(int position, Mylapak mylapak) {
-            Intent intent = new Intent();
-            intent.setClass(getApplicationContext(), MylapakActivity.class);
-            intent.putExtra("mylapak-object", mylapak);
-            startActivity(intent);
+        public void onMylapakChoose(int position) {
+            if(isControllerNotNull()){
+                controller.onMylapakChoose(position);
+            }
         }
     };
 
@@ -56,6 +56,14 @@ public class ListMylapakActivity extends BaseActivity {
 
     public MylapakAdapter getAdapter() {
         return adapter;
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(isControllerNotNull()){
+            controller.onActivityResult(requestCode, resultCode, data);
+        }
     }
 }
 

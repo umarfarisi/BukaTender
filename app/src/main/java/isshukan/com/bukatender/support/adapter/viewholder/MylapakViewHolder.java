@@ -54,7 +54,7 @@ public class MylapakViewHolder extends RecyclerView.ViewHolder implements View.O
     @Override
     public void onClick(View v) {
         if(position != -1){
-            listener.onMylapakChoose(position, mylapak);
+            listener.onMylapakChoose(position);
         }
     }
 }

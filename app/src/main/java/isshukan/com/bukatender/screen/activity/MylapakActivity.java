@@ -1,5 +1,7 @@
 package isshukan.com.bukatender.screen.activity;
 
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -10,7 +12,7 @@ import isshukan.com.bukatender.screen.activity.controller.MylapakController;
  * Created by - on 26/05/2017.
  */
 
-public class MylapakActivity extends BaseActivity {
+public class MylapakActivity extends BaseActivity implements View.OnClickListener {
     private TextView mylapakRatingTV;
     private TextView mylapakUserCountTV;
     private TextView mylapakInterestCountTV;
@@ -21,6 +23,8 @@ public class MylapakActivity extends BaseActivity {
     private TextView mylapakDescriptionTV;
     private RatingBar mylapakRB;
     private ImageView mylapakIV;
+    private Button actionButton;
+
     private MylapakController controller;
 
     @Override
@@ -36,11 +40,13 @@ public class MylapakActivity extends BaseActivity {
         mylapakDescriptionTV = (TextView) findViewById(R.id.mylapakDescriptionTV);
         mylapakRB = (RatingBar) findViewById(R.id.mylapakRB);
         mylapakIV = (ImageView) findViewById(R.id.mylapakIV);
+        actionButton = (Button) findViewById(R.id.actionButton);
     }
 
     @Override
     public void setDefaultSetting() {
         controller = new MylapakController(this);
+        actionButton.setOnClickListener(this);
         controller.fetchData();
     }
 
@@ -87,5 +93,16 @@ public class MylapakActivity extends BaseActivity {
 
     public ImageView getMylapakIV() {
         return mylapakIV;
+    }
+
+    public Button getActionButton() {
+        return actionButton;
+    }
+
+    @Override
+    public void onClick(View v) {
+        if(isControllerNotNull()){
+            controller.onClick(v.getId());
+        }
     }
 }

@@ -12,10 +12,14 @@ import java.util.Date;
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.constant.ConstantAPI;
+import isshukan.com.bukatender.dataaccess.api.BidDA;
 import isshukan.com.bukatender.dataaccess.api.TenderDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
+import isshukan.com.bukatender.model.Bid;
+import isshukan.com.bukatender.model.Mylapak;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.ListBidActivity;
+import isshukan.com.bukatender.screen.activity.ListMylapakActivity;
 import isshukan.com.bukatender.screen.activity.SetTenderActivity;
 import isshukan.com.bukatender.screen.activity.TenderDetailActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
@@ -28,14 +32,17 @@ import isshukan.com.bukatender.support.utils.Formatter;
 public class TenderDetailController {
 
     private static final int EDIT_TENDER_REQ_CODE = 1;
+    private static final int ADD_BID_REQ_CODE = 2;
     private TenderDetailActivity activity;
 
     private Tender tender;
     private TenderDA tenderDA;
+    private BidDA bidDA;
 
     public TenderDetailController(TenderDetailActivity activity) {
         this.activity = activity;
         tenderDA = new TenderDA();
+        bidDA = new BidDA();
         handleIntent();
         loadData();
         setDefaultSetting();
@@ -99,17 +106,43 @@ public class TenderDetailController {
                     intent.putExtra(Constant.TENDER, tender);
                     activity.startActivityForResult(intent, EDIT_TENDER_REQ_CODE);
                 }else{
-                    //Bid
+                    //Add Bid
+                    intent = new Intent(activity, ListMylapakActivity.class);
+                    activity.startActivityForResult(intent, ADD_BID_REQ_CODE);
                 }
                 break;
         }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == EDIT_TENDER_REQ_CODE){
-            if(resultCode == Activity.RESULT_OK){
+        if(resultCode == Activity.RESULT_OK) {
+            if (requestCode == EDIT_TENDER_REQ_CODE) {
                 this.tender = (Tender) data.getSerializableExtra(Constant.TENDER);
                 loadData();
+            } else if (requestCode == ADD_BID_REQ_CODE) {
+                Mylapak mylapak = (Mylapak) data.getSerializableExtra(Constant.PRODUCT);
+                Bid bid = new Bid(tender.getTenderId(), mylapak.getMylapakId(), tender.getUserId(), Authentication.getUserId(), mylapak.getImageURL(), mylapak.getTitle(), mylapak.getPrice(), mylapak.getDescription());
+                bidDA.createBid(bid, new DACallback<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean isSuccess) {
+                        if(isActivityNotNull()) {
+                            if (isSuccess) {
+                                Intent intent = new Intent(activity, ListBidActivity.class);
+                                intent.putExtra(Constant.TENDER, tender);
+                                activity.startActivity(intent);
+                            } else {
+                                Toast.makeText(activity, "ERROR: BID FAILED TO CREATED", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        if(isActivityNotNull()){
+                            Toast.makeText(activity,"ERROR: "+message,Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
         }
     }

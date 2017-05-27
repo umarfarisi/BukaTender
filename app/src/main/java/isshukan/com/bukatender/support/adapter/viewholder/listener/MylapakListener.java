@@ -7,5 +7,5 @@ import isshukan.com.bukatender.model.Mylapak;
  */
 
 public interface MylapakListener {
-    void onMylapakChoose(int position, Mylapak mylapak);
+    void onMylapakChoose(int position);
 }

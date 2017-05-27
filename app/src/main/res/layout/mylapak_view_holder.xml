@@ -24,8 +24,11 @@
             android:layout_height="100dp">
 
             <TextView
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:layout_marginBottom="@dimen/margin_standard"
                 android:textStyle="bold"
-                android:textAppearance="?android:textAppearanceLarge"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:text="Nama Barang"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -33,7 +36,8 @@
                 android:id="@+id/mylapakTitleTextView"/>
 
             <TextView
-                android:textAppearance="?android:textAppearanceSmall"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:textAppearance="?android:textAppearanceMedium"
                 android:text="Price"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -41,6 +45,8 @@
                 android:id="@+id/mylapakPriceTextView"/>
 
             <TextView
+                android:ellipsize="end"
+                android:maxLines="2"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:text="Description"
                 android:layout_width="match_parent"

@@ -1,5 +1,7 @@
 package isshukan.com.bukatender.dataaccess.api;
 
+import android.util.Log;
+
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
@@ -12,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
 import isshukan.com.bukatender.constant.ConstantAPI;
@@ -99,6 +102,30 @@ public class BidDA {
             String shortDescription = dataJO.getString(ConstantAPI.SHORT_DESCRIPTION);
             bids.add(new Bid(tenderId, productId, userTenderId, userBidId, imageResource, titleProduct, bidPrice, shortDescription));
         }
+    }
+
+    public void createBid(Bid bid, final DACallback<Boolean> callback){
+        Map<String, String> params = new HashMap<>();
+        params.put(ConstantAPI.METHOD, ConstantAPI.METHOD_CREATE);
+        params.put(ConstantAPI.TENDER_ID, String.valueOf(bid.getTenderId()));
+        params.put(ConstantAPI.PRODUCT_ID, bid.getProductId());
+        params.put(ConstantAPI.USER_TENDER_ID, bid.getUserTenderId());
+        params.put(ConstantAPI.USER_BID_ID, bid.getUserBidId());
+        params.put(ConstantAPI.IMAGE_RESOURCE, bid.getImageResource());
+        params.put(ConstantAPI.TITLE_PRODUCT, bid.getTitleProduct());
+        params.put(ConstantAPI.BID_PRICE, String.valueOf(bid.getBidPrice()));
+        params.put(ConstantAPI.SHORT_DESCRIPTION, bid.getShortDescription());
+        APIHelper.post(ConstantAPI.BASE_URL + ConstantAPI.BID_END_POINT, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("BIDDDDD","RESPONSEE: "+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callback.onFailure(error.getMessage());
+            }
+        }, params);
     }
 
 

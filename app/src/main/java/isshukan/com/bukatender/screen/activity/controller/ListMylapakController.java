@@ -1,5 +1,7 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.util.Base64;
 import android.widget.Toast;
 import com.android.volley.Response;
@@ -13,10 +15,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.api.APIHelper;
 import isshukan.com.bukatender.model.Mylapak;
 import isshukan.com.bukatender.screen.activity.ListMylapakActivity;
+import isshukan.com.bukatender.screen.activity.MylapakActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
@@ -25,6 +29,7 @@ import isshukan.com.bukatender.support.utils.Authentication;
 
 public class ListMylapakController {
 
+    private static final int PRODUCT_DETAIL_REQ_CODE = 1;
     private ListMylapakActivity activity;
     private List<Mylapak> mylapaks;
 
@@ -73,5 +78,22 @@ public class ListMylapakController {
                 Toast.makeText(activity, "Cannot fetch data\nPlease check your network connection", Toast.LENGTH_SHORT).show();
             }
         }, header);
+    }
+
+    public void onMylapakChoose(int position) {
+        Intent intent = new Intent();
+        intent.setClass(activity, MylapakActivity.class);
+        intent.putExtra(Constant.PRODUCT, mylapaks.get(position));
+        intent.putExtra(Constant.PURPOSE, Constant.PURPOSE_ADD_BID);
+        activity.startActivityForResult(intent, PRODUCT_DETAIL_REQ_CODE);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode == Activity.RESULT_OK){
+            if(requestCode == PRODUCT_DETAIL_REQ_CODE){
+                activity.setResult(Activity.RESULT_OK, data);
+                activity.finish();
+            }
+        }
     }
 }
