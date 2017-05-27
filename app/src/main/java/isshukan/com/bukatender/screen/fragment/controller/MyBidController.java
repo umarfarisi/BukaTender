@@ -1,14 +1,17 @@
 package isshukan.com.bukatender.screen.fragment.controller;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.Toast;
 
 import java.util.List;
 
 import isshukan.com.bukatender.R;
+import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.dataaccess.api.BidDA;
 import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
+import isshukan.com.bukatender.screen.activity.MylapakActivity;
 import isshukan.com.bukatender.screen.fragment.MyBidFragment;
 import isshukan.com.bukatender.support.utils.Authentication;
 
@@ -102,5 +105,14 @@ public class MyBidController{
                 }
             });
         }
+    }
+
+    public void onBidChoose(int position) {
+        Bid bid = bids.get(position);
+        Intent intent = new Intent(fragment.getActivity(), MylapakActivity.class);
+        intent.putExtra(Constant.PRODUCT_ID, bid.getProductId());
+        intent.putExtra(Constant.USER_ID, bid.getUserBidId());
+        intent.putExtra(Constant.PURPOSE, Constant.PURPOSE_SEE_PRODUCT);
+        fragment.startActivity(intent);
     }
 }

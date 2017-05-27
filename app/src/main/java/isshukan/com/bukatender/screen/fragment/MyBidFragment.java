@@ -44,7 +44,7 @@ public class MyBidFragment extends BaseFragment implements View.OnClickListener 
         @Override
         public void onBidChoose(int position) {
             if(isControllerNotNull()){
-                //TODO
+                controller.onBidChoose(position);
             }
         }
 

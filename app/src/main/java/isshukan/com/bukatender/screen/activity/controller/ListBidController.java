@@ -14,6 +14,7 @@ import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.ListBidActivity;
+import isshukan.com.bukatender.screen.activity.MylapakActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
@@ -116,5 +117,14 @@ public class ListBidController {
                 }
             });
         }
+    }
+
+    public void onBidChoose(int position) {
+        Bid bid = bids.get(position);
+        Intent intent = new Intent(activity, MylapakActivity.class);
+        intent.putExtra(Constant.PRODUCT_ID, bid.getProductId());
+        intent.putExtra(Constant.USER_ID, bid.getUserBidId());
+        intent.putExtra(Constant.PURPOSE, Constant.PURPOSE_SEE_PRODUCT);
+        activity.startActivity(intent);
     }
 }

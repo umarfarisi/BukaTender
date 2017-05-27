@@ -73,7 +73,7 @@ public class MylapakController {
             fetchData();
         } else {
             String productID = intent.getStringExtra(Constant.PRODUCT_ID);
-            String userID = Authentication.getUserId();
+            String userID =intent.getStringExtra(Constant.USER_ID);
             String token = Authentication.getUserToken();
             String auth = "Basic " + Base64.encodeToString((userID + ":" + token).getBytes(), Base64.NO_WRAP);
             Map<String, String> header = new HashMap<>();

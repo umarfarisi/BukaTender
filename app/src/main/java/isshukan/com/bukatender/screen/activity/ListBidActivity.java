@@ -34,7 +34,9 @@ public class ListBidActivity extends BaseActivity implements View.OnClickListene
     private BidListener listener = new BidListener() {
         @Override
         public void onBidChoose(int position) {
-            //TODO
+            if(isControllerNotNull()){
+                controller.onBidChoose(position);
+            }
         }
 
         @Override
