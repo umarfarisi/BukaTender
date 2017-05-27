@@ -59,26 +59,6 @@ public class MylapakActivity extends BaseActivity implements View.OnClickListene
         actionButton.setOnClickListener(this);
     }
 
-    public void configureViews(Mylapak mylapak) {
-        if(mylapak.getImageURL() != null && !mylapak.getImageURL().isEmpty()){
-            Picasso.with(this).load(mylapak.getImageURL()).fit().into(this.getMylapakIV());
-        } else {
-            Toast.makeText(this, "Could not load image", Toast.LENGTH_SHORT).show();
-        }
-        this.getMylapakRatingTV().setText("Rating: " + mylapak.getAvg_rate());
-        this.getMylapakRB().setRating((float) mylapak.getAvg_rate());
-        this.getMylapakUserCountTV().setText(mylapak.getView_count() + " views");
-        this.getMylapakInterestCountTV().setText(mylapak.getInterest_count() + " interested");
-        this.getMylapakNameTV().setText(mylapak.getTitle());
-        this.getMylapakPriceTV().setText(Formatter.priceFormatter(mylapak.getPrice()));
-        this.getMylapakStockTV().setText(String.valueOf(mylapak.getStock()));
-        this.getMylapakConditionTV().setText("Condition: " + mylapak.getCondition());
-        this.getMylapakDescriptionTV().setText(mylapak.getDescription());
-        this.getMylapakSellerTV().setText("Seller: " + mylapak.getSeller());
-        this.getMylapakFeedbackTV().setText("Feedback: " + String.valueOf(mylapak.getSellerPositiveFeedback())
-                + " pros / " + String.valueOf(mylapak.getSellerNegativeFeedback()) + " cons");
-    }
-
     @Override
     public boolean isControllerNotNull() {
         return controller != null;

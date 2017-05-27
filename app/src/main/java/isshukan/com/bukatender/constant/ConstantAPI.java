@@ -43,4 +43,8 @@ public class ConstantAPI {
     public static final String TAG = "tag";
     public static final String SPECIFIC_TENDER = "specific_tender";
     public static final String BUKALAPAK_REGISTER_WEBSITE = "https://www.bukalapak.com/register?from=header";
+
+    public static final String PRODUCTS = "products";
+    public static final String AUTHORIZATION = "Authorization";
+    public static final String PRODUCT = "product";
 }

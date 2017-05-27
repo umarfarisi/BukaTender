@@ -19,6 +19,8 @@ import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.api.APIHelper;
+import isshukan.com.bukatender.dataaccess.api.MylapakDA;
+import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Mylapak;
 import isshukan.com.bukatender.screen.activity.MylapakActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
@@ -33,10 +35,13 @@ public class MylapakController {
     private MylapakActivity activity;
     private Mylapak mylapak;
 
+    private MylapakDA mylapakDA;
+
     private boolean isPurposeForAddBid;
 
     public MylapakController(MylapakActivity activity) {
         this.activity = activity;
+        mylapakDA = new MylapakDA();
         handleIntent();
         if(isPurposeForAddBid){
             activity.getActionButton().setText("ADD TO BID");
@@ -74,28 +79,19 @@ public class MylapakController {
         } else {
             String productID = intent.getStringExtra(Constant.PRODUCT_ID);
             String userID =intent.getStringExtra(Constant.USER_ID);
-            String token = Authentication.getUserToken();
-            String auth = "Basic " + Base64.encodeToString((userID + ":" + token).getBytes(), Base64.NO_WRAP);
-            Map<String, String> header = new HashMap<>();
-            header.put("Authorization", auth);
-            header.put("Content-Type", "application/json");
-            APIHelper.get(ConstantAPI.BUKALAPAK_PRODUCT_ENDPOINT + productID + ".json", new Response.Listener<String>() {
+            mylapakDA.getSpecificMylapak(productID, userID, new DACallback<Mylapak>() {
                 @Override
-                public void onResponse(String response) {
-                    try{
-                        JSONObject jsonObject = new JSONObject(response);
-                        MylapakController.this.mylapak = new Mylapak(jsonObject.getJSONObject("product"));
-                        activity.configureViews(mylapak);
-                    } catch (Exception e) {
-                        Toast.makeText(activity, "Cannot fetch data\nPlease check your network connection", Toast.LENGTH_SHORT).show();
-                    }
+                public void onSuccess(Mylapak mylapak) {
+                    MylapakController.this.mylapak = mylapak;
+                    fetchData();
                 }
-            }, new Response.ErrorListener() {
+
                 @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(activity, "Cannot fetch data\nPlease check your network connection", Toast.LENGTH_SHORT).show();
+                public void onFailure(String message) {
+                    Toast.makeText(activity, message, Toast.LENGTH_SHORT).show();
                 }
-            }, header);
+            });
+
         }
     }
 

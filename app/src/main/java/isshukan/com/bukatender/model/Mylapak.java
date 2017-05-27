@@ -49,6 +49,25 @@ public class Mylapak implements Serializable {
         this.sellerNegativeFeedback = myLapakJSON.optInt("seller_negative_feedback");
     }
 
+    public Mylapak(String mylapakId, String title, Double price, String category, String description, String imageSmallURL, String imageURL, String condition, String seller, int sellerPositiveFeedback, int sellerNegativeFeedback, int stock, double avg_rate, int user_count_rate, int view_count, int interest_count) {
+        this.mylapakId = mylapakId;
+        this.title = title;
+        this.price = price;
+        this.category = category;
+        this.description = description;
+        this.imageSmallURL = imageSmallURL;
+        this.imageURL = imageURL;
+        this.condition = condition;
+        this.seller = seller;
+        this.sellerPositiveFeedback = sellerPositiveFeedback;
+        this.sellerNegativeFeedback = sellerNegativeFeedback;
+        this.stock = stock;
+        this.avg_rate = avg_rate;
+        this.user_count_rate = user_count_rate;
+        this.view_count = view_count;
+        this.interest_count = interest_count;
+    }
+
     public String getMylapakId() {
         return mylapakId;
     }
