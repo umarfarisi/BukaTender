@@ -14,6 +14,7 @@ import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Bid;
 import isshukan.com.bukatender.model.Tender;
 import isshukan.com.bukatender.screen.activity.ListBidActivity;
+import isshukan.com.bukatender.support.utils.Authentication;
 
 /**
  * @author Muhammad Umar Farisi
@@ -82,7 +83,9 @@ public class ListBidController {
 
     public void onBidChooseForLongTime(int position) {
         deletedBid = bids.get(position);
-        activity.getDialog().show();
+        if(deletedBid.getUserBidId().equals(Authentication.getUserId())) {
+            activity.getDialog().show();
+        }
     }
 
     public void onClick(int id) {
