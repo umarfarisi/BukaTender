@@ -14,4 +14,20 @@
         android:layout_height="wrap_content"
         android:id="@+id/mylapakRecyclerView"/>
 
+    <ProgressBar
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:indeterminate="true"/>
+
+    <TextView
+        android:visibility="gone"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/emptyTextView"
+        android:text="@string/empty"/>
+
 </RelativeLayout>

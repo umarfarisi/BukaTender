@@ -7,6 +7,9 @@ package isshukan.com.bukatender.screen.activity;
 import android.content.Intent;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import java.util.List;
 import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
@@ -18,6 +21,8 @@ import isshukan.com.bukatender.support.adapter.viewholder.listener.MylapakListen
 public class ListMylapakActivity extends BaseActivity {
 
     private RecyclerView mylapakRecyclerView;
+    private ProgressBar progressBar;
+    private TextView emptyTextView;
 
     private MylapakAdapter adapter;
 
@@ -36,6 +41,8 @@ public class ListMylapakActivity extends BaseActivity {
     public void loadViews() {
         setContentView(R.layout.activity_list_mylapak);
         mylapakRecyclerView = (RecyclerView) findViewById(R.id.mylapakRecyclerView);
+        emptyTextView = (TextView) findViewById(R.id.emptyTextView);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
     }
 
     @Override
@@ -56,6 +63,18 @@ public class ListMylapakActivity extends BaseActivity {
 
     public MylapakAdapter getAdapter() {
         return adapter;
+    }
+
+    public ProgressBar getProgressBar() {
+        return progressBar;
+    }
+
+    public TextView getEmptyTextView() {
+        return emptyTextView;
+    }
+
+    public RecyclerView getMylapakRecyclerView() {
+        return mylapakRecyclerView;
     }
 
     @Override

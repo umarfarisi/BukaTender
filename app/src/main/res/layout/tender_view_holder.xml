@@ -48,6 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text=" (expired)"/>
             <TextView
+                android:visibility="gone"
                 android:maxLines="1"
                 android:ellipsize="end"
                 android:textAppearance="?android:textAppearanceSmall"

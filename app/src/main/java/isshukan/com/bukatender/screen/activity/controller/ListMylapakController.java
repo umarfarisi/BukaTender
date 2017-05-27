@@ -3,6 +3,7 @@ package isshukan.com.bukatender.screen.activity.controller;
 import android.app.Activity;
 import android.content.Intent;
 import android.util.Base64;
+import android.view.View;
 import android.widget.Toast;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -40,6 +41,10 @@ public class ListMylapakController {
     }
 
     public void fetchMylapak() {
+
+//        activity.getProgressBar().setVisibility(View.VISIBLE);
+//        activity.getMylapakRecyclerView().setVisibility(View.GONE);
+
         String user_id = Authentication.getUserId();
         String token = Authentication.getUserToken();
 
