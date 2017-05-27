@@ -45,7 +45,9 @@ public class TenderDetailActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.tender_detail_menu, menu);
+        if(isControllerNotNull()){
+            controller.onCreateOptionMenu(menu);
+        }
         return super.onCreateOptionsMenu(menu);
     }
 

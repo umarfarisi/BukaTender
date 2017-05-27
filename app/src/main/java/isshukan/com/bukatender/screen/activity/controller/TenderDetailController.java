@@ -3,6 +3,7 @@ package isshukan.com.bukatender.screen.activity.controller;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
@@ -148,26 +149,28 @@ public class TenderDetailController {
     }
 
     public void onOptionItemSelected(int itemId) {
-        if(itemId == R.id.deleteMenu){
-            tenderDA.deleteTender(tender, new DACallback<Boolean>() {
-                @Override
-                public void onSuccess(Boolean isSuccess) {
-                    if(isActivityNotNull()) {
-                        if (isSuccess) {
-                            activity.finish();
-                        } else {
+        if(tender.getUserId().equals(Authentication.getUserId())) {
+            if (itemId == R.id.deleteMenu) {
+                tenderDA.deleteTender(tender, new DACallback<Boolean>() {
+                    @Override
+                    public void onSuccess(Boolean isSuccess) {
+                        if (isActivityNotNull()) {
+                            if (isSuccess) {
+                                activity.finish();
+                            } else {
+                                Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String message) {
+                        if (isActivityNotNull()) {
                             Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
                         }
                     }
-                }
-
-                @Override
-                public void onFailure(String message) {
-                    if(isActivityNotNull()){
-                        Toast.makeText(activity, "Failed to delete tender", Toast.LENGTH_LONG).show();
-                    }
-                }
-            });
+                });
+            }
         }
     }
 
@@ -175,4 +178,9 @@ public class TenderDetailController {
         return activity != null;
     }
 
+    public void onCreateOptionMenu(Menu menu) {
+        if(tender.getUserId().equals(Authentication.getUserId())){
+            activity.getMenuInflater().inflate(R.menu.tender_detail_menu, menu);
+        }
+    }
 }
