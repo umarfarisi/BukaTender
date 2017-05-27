@@ -1,5 +1,6 @@
 package isshukan.com.bukatender.screen.activity.controller;
 
+import android.net.Uri;
 import android.util.Base64;
 import android.widget.Toast;
 import com.android.volley.Response;
@@ -8,6 +9,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import isshukan.com.bukatender.R;
 import isshukan.com.bukatender.constant.Constant;
 import isshukan.com.bukatender.constant.ConstantAPI;
 import isshukan.com.bukatender.dataaccess.api.APIHelper;
@@ -34,7 +36,7 @@ public class LoginController {
         }
     }
 
-    public void login() {
+    private void login() {
 
         String username = activity.getUsernameET().getText().toString();
         String password = activity.getPasswordET().getText().toString();
@@ -78,5 +80,22 @@ public class LoginController {
             }, null, header);
         }
 
+    }
+
+    public void onClick(int id) {
+        switch (id){
+            case R.id.loginBtn:
+                login();
+                break;
+            case R.id.registerTextView:
+                register();
+                break;
+        }
+    }
+
+    private void register() {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setData(Uri.parse(ConstantAPI.BUKALAPAK_REGISTER_WEBSITE));
+        activity.startActivity(intent);
     }
 }
