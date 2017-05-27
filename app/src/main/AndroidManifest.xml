@@ -25,6 +25,8 @@
         <activity android:name=".screen.activity.MylapakActivity" />
         <activity android:name=".screen.activity.TenderDetailActivity" />
         <activity android:name=".screen.activity.SetTenderActivity" />
+        <activity android:name=".screen.activity.TransactionListActivity" />
+        <activity android:name=".screen.activity.TransactionActivity"></activity>
     </application>
 
 </manifest>

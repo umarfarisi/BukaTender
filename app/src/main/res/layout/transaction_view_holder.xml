@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardElevation="@dimen/cardview_default_elevation"
+    android:layout_margin="@dimen/margin_standard">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_marginRight="@dimen/margin_standard"
+            android:layout_width="70dp"
+            android:layout_height="100dp"
+            android:id="@+id/transactionImageView"/>
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_weight="1">
+            <TextView
+                android:textStyle="bold"
+                android:text="Nama Barang"
+                android:layout_width="match_parent"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                android:layout_height="wrap_content"
+                android:id="@+id/transactionTitleTextView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:text="Harga"
+                android:id="@+id/transactionPriceTextView"
+                android:layout_below="@+id/transactionTitleTextView"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Status: "
+                android:id="@+id/transactionStatusTextView"
+                android:layout_below="@id/transactionPriceTextView"/>
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

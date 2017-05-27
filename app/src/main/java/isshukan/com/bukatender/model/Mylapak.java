@@ -1,5 +1,11 @@
 package isshukan.com.bukatender.model;
 
+import android.app.Activity;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.Serializable;
 
 /**
@@ -21,20 +27,20 @@ public class Mylapak implements Serializable {
     private int view_count;
     private int interest_count;
 
-    public Mylapak(String mylapakId, String title, Double price, String category, String description, String imageSmallURL, String imageURL, String condition, int stock, double avg_rate, int user_count_rate, int view_count, int interest_count) {
-        this.mylapakId = mylapakId;
-        this.title = title;
-        this.price = price;
-        this.category = category;
-        this.description = description;
-        this.imageSmallURL = imageSmallURL;
-        this.imageURL = imageURL;
-        this.condition = condition;
-        this.stock = stock;
-        this.avg_rate = avg_rate;
-        this.user_count_rate = user_count_rate;
-        this.view_count = view_count;
-        this.interest_count = interest_count;
+    public Mylapak(JSONObject myLapakJSON) throws JSONException {
+        this.mylapakId = myLapakJSON.getString("id");
+        this.title = myLapakJSON.getString("name");
+        this.price = myLapakJSON.getDouble("price");
+        this.category = myLapakJSON.getString("category");
+        this.description = myLapakJSON.getString("desc");
+        this.imageSmallURL = myLapakJSON.getJSONArray("small_images").getString(0);
+        this.imageURL = myLapakJSON.getJSONArray("images").getString(0);
+        this.condition = myLapakJSON.getString("condition");
+        this.stock = myLapakJSON.optInt("stock");
+        this.avg_rate = myLapakJSON.getJSONObject("rating").getDouble("average_rate");
+        this.user_count_rate = myLapakJSON.getJSONObject("rating").getInt("user_count");
+        this.view_count = myLapakJSON.getInt("view_count");
+        this.interest_count = myLapakJSON.getInt("interest_count");
     }
 
     public String getMylapakId() {

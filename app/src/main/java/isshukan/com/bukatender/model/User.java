@@ -1,23 +1,32 @@
 package isshukan.com.bukatender.model;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * @author Muhammad Umar Farisi
  * @created 09/05/2017
  */
 public class User {
 
+    private int id;
     private String name;
     private String email;
-    private String phone;
     private String username;
     private String password;
 
-    public User(String name, String email, String phone, String username, String password) {
-        this.name = name;
-        this.email = email;
-        this.phone = phone;
-        this.username = username;
-        this.password = password;
+    public User(JSONObject userJSON) throws JSONException {
+        this.id = userJSON.getInt("id");
+        this.name = userJSON.getString("name");
+        this.username = userJSON.getString("username");
+
+        if (userJSON.has("email")){
+            this.email = userJSON.getString("email");
+        }
+    }
+
+    public int getId(){
+        return id;
     }
 
     public String getName() {
@@ -34,14 +43,6 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
     }
 
     public String getUsername() {
@@ -79,9 +80,9 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
+                "id='" + id + '\'' +
                 "name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
                 ", username='" + username + '\'' +
                 '}';
     }
