@@ -128,5 +128,31 @@ public class BidDA {
         }, params);
     }
 
+    public void deleteBid(Bid bid, final DACallback<Boolean> callback){
+        Map<String,String> params = new HashMap<>();
+        params.put(ConstantAPI.METHOD , ConstantAPI.METHOD_DELETE);
+        params.put(ConstantAPI.TENDER_ID, String.valueOf(bid.getTenderId()));
+        params.put(ConstantAPI.PRODUCT_ID, bid.getProductId());
+        params.put(ConstantAPI.USER_TENDER_ID, bid.getUserTenderId());
+        params.put(ConstantAPI.USER_BID_ID, bid.getUserBidId());
+        APIHelper.post(url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject responseJO = new JSONObject(response);
+                    String status = responseJO.getString(ConstantAPI.STATUS);
+                    callback.onSuccess(status.equals(ConstantAPI.STATUS_SUCCESS));
+                } catch (JSONException e) {
+                    callback.onFailure("ERROR: "+e.getMessage());
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                callback.onFailure("ERROR: "+error.getMessage());
+            }
+        }, params);
+    }
+
 
 }

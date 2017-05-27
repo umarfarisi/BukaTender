@@ -6,4 +6,5 @@ package isshukan.com.bukatender.support.adapter.viewholder.listener;
  */
 public interface BidListener {
     void onBidChoose(int position);
+    void onBidChooseForLongTime(int position);
 }
