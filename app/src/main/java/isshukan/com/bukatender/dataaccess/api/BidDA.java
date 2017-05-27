@@ -118,7 +118,13 @@ public class BidDA {
         APIHelper.post(ConstantAPI.BASE_URL + ConstantAPI.BID_END_POINT, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("BIDDDDD","RESPONSEE: "+response);
+                try {
+                    JSONObject responseJO = new JSONObject(response);
+                    String status = responseJO.getString(ConstantAPI.STATUS);
+                    callback.onSuccess(status.equals(ConstantAPI.STATUS_SUCCESS));
+                } catch (JSONException e) {
+                    callback.onFailure("ERROR: "+e.getMessage());
+                }
             }
         }, new Response.ErrorListener() {
             @Override

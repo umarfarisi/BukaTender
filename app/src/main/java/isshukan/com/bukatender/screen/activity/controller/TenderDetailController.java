@@ -3,6 +3,7 @@ package isshukan.com.bukatender.screen.activity.controller;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.widget.Toast;
 
@@ -116,7 +117,9 @@ public class TenderDetailController {
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
         if(resultCode == Activity.RESULT_OK) {
+
             if (requestCode == EDIT_TENDER_REQ_CODE) {
                 this.tender = (Tender) data.getSerializableExtra(Constant.TENDER);
                 loadData();
@@ -132,7 +135,7 @@ public class TenderDetailController {
                                 intent.putExtra(Constant.TENDER, tender);
                                 activity.startActivity(intent);
                             } else {
-                                Toast.makeText(activity, "ERROR: BID FAILED TO CREATED", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(activity, "Product had been added to bid this tender", Toast.LENGTH_LONG).show();
                             }
                         }
                     }
