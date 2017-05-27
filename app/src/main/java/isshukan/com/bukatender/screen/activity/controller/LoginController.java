@@ -62,7 +62,7 @@ public class LoginController {
 
                             Intent intent = new Intent();
                             //intent.setClass(activity, MainActivity.class);
-                            intent.setClass(activity, ListMylapakActivity.class);
+                            intent.setClass(activity, MainActivity.class);
                             activity.startActivity(intent);
                             activity.finish();
                         } else {
