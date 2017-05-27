@@ -43,7 +43,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:id="@+id/validityPeriodButton"
-            android:text="Periode"/>
+            android:text="Period"/>
         <Button
             android:layout_margin="@dimen/margin_standard"
             android:textColor="@android:color/white"
