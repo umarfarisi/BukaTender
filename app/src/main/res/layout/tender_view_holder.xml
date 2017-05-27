@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <ImageView
+            android:scaleType="fitXY"
             android:layout_marginRight="@dimen/margin_standard"
             android:layout_width="70dp"
             android:layout_height="100dp"
@@ -22,6 +23,8 @@
             android:layout_width="0dp"
             android:layout_height="100dp">
             <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textStyle="bold"
                 android:textAppearance="?android:textAppearanceLarge"
                 android:text="Galaxi 7"
@@ -45,6 +48,8 @@
                 android:layout_height="wrap_content"
                 android:text=" (expired)"/>
             <TextView
+                android:maxLines="1"
+                android:ellipsize="end"
                 android:textAppearance="?android:textAppearanceSmall"
                 android:text="HP, Elektronik, HandPhone"
                 android:layout_width="match_parent"
