@@ -52,6 +52,6 @@
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dont have account?\nRegister hear"/>
+        android:text="Didn't have any account?\nRegister here"/>
 
 </LinearLayout>

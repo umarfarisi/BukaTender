@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
-        android:layout_weight="0.3">
+        android:layout_weight="0.27">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -112,6 +112,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Condition: New"
+                android:textAppearance="@android:style/TextAppearance.Medium"
+                android:textSize="14sp"
+                android:maxLines="1"/>
+
+            <TextView
+                android:id="@+id/mylapakSellerTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seller: TrustedSeller"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:textAppearance="@android:style/TextAppearance.Medium" />
+
+            <TextView
+                android:id="@+id/mylapakFeedbackTV"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Feedback: 7 pros / 5 cons"
+                android:textSize="14sp"
+                android:maxLines="1"
                 android:textAppearance="@android:style/TextAppearance.Medium" />
 
             <TextView
@@ -119,14 +139,20 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description:"
+                android:textSize="14sp"
+                android:maxLines="1"
                 android:textAppearance="@android:style/TextAppearance.Medium"/>
 
             <TextView
                 android:id="@+id/mylapakDescriptionTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textSize="12sp"
                 android:text="Put description here"
-                android:layout_margin="7dp"/>
+                android:layout_marginTop="@dimen/margin_standard"
+                android:layout_marginBottom="@dimen/margin_standard"
+                android:layout_marginRight="@dimen/margin_large"
+                android:layout_marginLeft="@dimen/margin_large"/>
         </LinearLayout>
     </ScrollView>
 

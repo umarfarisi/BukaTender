@@ -66,5 +66,6 @@ public class APIHelper {
                 return headers;
             }
         };
+        Volley.newRequestQueue(GlobalVariable.APP_CONTEXT).add(request);
     }
 }

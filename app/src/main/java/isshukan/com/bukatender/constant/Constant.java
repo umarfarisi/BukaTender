@@ -12,6 +12,7 @@ public class Constant {
     public static final String USER_TOKEN = "user_token";
 
     public static final String PRODUCT = "product";
+    public static final String PRODUCT_ID = "product_id";
     public static final String PURPOSE = "purpose";
     public static final String PURPOSE_ADD_BID = "purpose_add_bid";
 }
