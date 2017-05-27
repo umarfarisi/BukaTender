@@ -21,6 +21,9 @@ public class Mylapak implements Serializable {
     private String imageSmallURL;
     private String imageURL;
     private String condition;
+    private String seller;
+    private int sellerPositiveFeedback;
+    private int sellerNegativeFeedback;
     private int stock;
     private double avg_rate;
     private int user_count_rate;
@@ -41,6 +44,9 @@ public class Mylapak implements Serializable {
         this.user_count_rate = myLapakJSON.getJSONObject("rating").getInt("user_count");
         this.view_count = myLapakJSON.getInt("view_count");
         this.interest_count = myLapakJSON.getInt("interest_count");
+        this.seller = myLapakJSON.getString("seller_name");
+        this.sellerPositiveFeedback = myLapakJSON.optInt("seller_positive_feedback");
+        this.sellerNegativeFeedback = myLapakJSON.optInt("seller_negative_feedback");
     }
 
     public String getMylapakId() {
@@ -147,6 +153,30 @@ public class Mylapak implements Serializable {
         this.interest_count = interest_count;
     }
 
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
+
+    public int getSellerPositiveFeedback() {
+        return sellerPositiveFeedback;
+    }
+
+    public void setSellerPositiveFeedback(int sellerPositiveFeedback) {
+        this.sellerPositiveFeedback = sellerPositiveFeedback;
+    }
+
+    public int getSellerNegativeFeedback() {
+        return sellerNegativeFeedback;
+    }
+
+    public void setSellerNegativeFeedback(int sellerNegativeFeedback) {
+        this.sellerNegativeFeedback = sellerNegativeFeedback;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -174,6 +204,9 @@ public class Mylapak implements Serializable {
                 ", imageSmallURL='" + imageSmallURL + '\'' +
                 ", imageURL='" + imageURL + '\'' +
                 ", condition='" + condition + '\'' +
+                ", seller='" + seller + '\'' +
+                ", sellerPositiveFeedback=" + sellerPositiveFeedback +
+                ", sellerNegativeFeedback=" + sellerNegativeFeedback +
                 ", stock=" + stock +
                 ", avg_rate=" + avg_rate +
                 ", user_count_rate=" + user_count_rate +

@@ -7,8 +7,9 @@ package isshukan.com.bukatender.constant;
 public class ConstantAPI {
 
     public static final String BUKALAPAK_USER_AUTH_ENDPOINT = "https://api.bukalapak.com/v2/authenticate.json";
-    public static final String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json";
-    //private String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json?not_for_sale_only=1"; //testing purpose
+    //public static final String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json";
+    public static String MYLAPAK_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json?not_for_sale_only=1"; //testing purpose
+    public static final String BUKALAPAK_PRODUCT_ENDPOINT = "https://api.bukalapak.com/v2/products/";
     public static final String BUKALAPAK_TRANSACTION_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json";
 
     public static final String BASE_URL = "http://10.0.2.2/buka_tender";
