@@ -12,7 +12,7 @@ public class ConstantAPI {
     public static final String BUKALAPAK_PRODUCT_ENDPOINT = "https://api.bukalapak.com/v2/products/";
     public static final String BUKALAPAK_TRANSACTION_ENDPOINT = "https://api.bukalapak.com/v2/products/mylapak.json";
 
-    public static final String BASE_URL = "http://10.0.2.2/buka_tender";
+    public static final String BASE_URL = "http://isshukanbt.esy.es/";
     public static final String TENDER_END_POINT = "/tender.php";
     public static final String TAG_END_POINT = "/tag.php";
     public static final String BID_END_POINT = "/bid.php";
