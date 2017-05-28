@@ -18,4 +18,8 @@ public class Converter {
         }
         return null;
     }
+
+    public static String convertProductNameToUrlFormat(String title) {
+        return title.replace(" ","-");
+    }
 }

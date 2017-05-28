@@ -2,6 +2,7 @@ package isshukan.com.bukatender.screen.activity.controller;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Toast;
@@ -24,6 +25,7 @@ import isshukan.com.bukatender.dataaccess.callback.DACallback;
 import isshukan.com.bukatender.model.Mylapak;
 import isshukan.com.bukatender.screen.activity.MylapakActivity;
 import isshukan.com.bukatender.support.utils.Authentication;
+import isshukan.com.bukatender.support.utils.Converter;
 import isshukan.com.bukatender.support.utils.Formatter;
 
 /**
@@ -103,7 +105,9 @@ public class MylapakController {
                 activity.setResult(Activity.RESULT_OK,data);
                 activity.finish();
             }else{
-                //TODO
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse("https://www.bukalapak.com/"+ Converter.convertProductNameToUrlFormat(mylapak.getTitle())+"-p-"+mylapak.getMylapakId()));
+                activity.startActivity(intent);
             }
         }
     }
